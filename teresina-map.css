@@ -1,0 +1,832 @@
+/* ============================================================
+   TeresinaMap — Estilos
+   Visual corporativo / holograma — consistente com MapaHolograma
+   ============================================================ */
+
+/* ─── Variáveis locais ────────────────────────────────────────────────── */
+:root {
+  --tmap-neon:      #00eaff;
+  --tmap-neon-dim:  rgba(0, 200, 255, 0.35);
+  --tmap-bg:        #020c18;
+  --tmap-border:    rgba(0, 200, 255, 0.18);
+  --tmap-text:      rgba(0, 220, 255, 0.85);
+  --tmap-text-dim:  rgba(0, 190, 230, 0.5);
+  --tmap-font:      'Syne', 'DM Sans', sans-serif;
+  --tmap-radius:    14px;
+}
+
+/* ─── Seção ───────────────────────────────────────────────────────────── */
+.tmap-secao {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, #021f3e 0%, var(--tmap-bg) 70%);
+  border-radius: 16px;
+  padding: 32px 28px 28px;
+  overflow: hidden;
+  contain: layout style;
+}
+
+.tmap-secao--fade-in {
+  animation: tmap-fade-in 0.45s ease-out both;
+}
+
+@keyframes tmap-fade-in {
+  from { opacity: 0; transform: scale(1.08); filter: blur(3px);  }
+  to   { opacity: 1; transform: scale(1);    filter: blur(0px);  }
+}
+
+/* ─── Cabeçalho ───────────────────────────────────────────────────────── */
+.tmap-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tmap-header__eyebrow {
+  font-family: var(--tmap-font);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--tmap-text-dim);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.tmap-header__title {
+  font-family: var(--tmap-font);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--tmap-text);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.tmap-header__title span {
+  color: var(--tmap-neon);
+  text-shadow: 0 0 12px rgba(0, 234, 255, 0.6);
+}
+
+/* ─── Botão Voltar ─────────────────────────────────────────────────── */
+.tmap-btn-back {
+  position:       absolute;
+  top:            0;
+  left:           0;
+  font-family:    var(--tmap-font);
+  font-size:      0.65rem;
+  font-weight:    700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding:        5px 14px;
+  background:     transparent;
+  border:         1px solid var(--tmap-border);
+  border-radius:  6px;
+  color:          var(--tmap-text-dim);
+  cursor:         pointer;
+  transition:     color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.tmap-btn-back:hover {
+  color:        var(--tmap-neon);
+  border-color: var(--tmap-neon);
+  box-shadow:   0 0 8px rgba(0, 234, 255, 0.25);
+}
+
+.tmap-btn-back:focus-visible,
+.tmap-style-btn:focus-visible,
+.tmap-panel__close:focus-visible,
+.tmap-panel__back:focus-visible,
+.tmap-pin:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 234, 255, 0.35);
+}
+
+/* ─── Wrapper ─────────────────────────────────────────────────────────── */
+.tmap-wrapper {
+  position:      relative;
+  flex-shrink:   0;
+  width:         100%;
+  height:        100%;
+  border-radius: var(--tmap-radius);
+  overflow:      hidden;
+  border:        1px solid var(--tmap-border);
+  box-shadow:    0 0 32px rgba(0, 180, 255, 0.08), inset 0 0 24px rgba(0, 0, 30, 0.5);
+  transition:    width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tmap-wrapper--focus {
+  width: 70%;
+  border-radius: var(--tmap-radius) 0 0 var(--tmap-radius);
+}
+
+/* ─── Container Mapbox ────────────────────────────────────────────────── */
+.tmap-container {
+  width: 100%;
+  height: 100%;
+  z-index: 0 !important;
+  position: relative;
+}
+
+/* Ensure Mapbox canvas does not create an overlay above page content */
+.mapboxgl-canvas {
+  z-index: 0 !important;
+}
+
+/* Avoid map elements forcing their own stacking context; disable transforms */
+.tmap-wrapper, .tmap-container, .mapboxgl-canvas {
+  transform: none !important;
+  will-change: auto !important;
+}
+
+/* ─── Override Mapbox logo / attrib (não remover — apenas reposicionar) ─ */
+.tmap-container .mapboxgl-ctrl-logo {
+  opacity: 0.4;
+  filter: brightness(0) invert(1);
+}
+
+.tmap-container .mapboxgl-ctrl-attrib {
+  background: rgba(2, 12, 24, 0.7) !important;
+  color: var(--tmap-text-dim) !important;
+  font-size: 0.6rem;
+}
+
+.tmap-container .mapboxgl-ctrl-attrib a {
+  color: var(--tmap-neon-dim) !important;
+}
+
+/* ─── Controles de navegação: estilo holograma ───────────────────────── */
+.tmap-container .mapboxgl-ctrl-group {
+  background: rgba(2, 15, 35, 0.85) !important;
+  border: 1px solid var(--tmap-border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 10px rgba(0, 180, 255, 0.15) !important;
+}
+
+.tmap-container .mapboxgl-ctrl-group button {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.tmap-container .mapboxgl-ctrl-group button:hover {
+  background-color: rgba(0, 200, 255, 0.1) !important;
+}
+
+.tmap-container .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon,
+.tmap-container .mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon,
+.tmap-container .mapboxgl-ctrl-compass .mapboxgl-ctrl-icon {
+  filter: invert(1) brightness(0.7) sepia(1) saturate(5) hue-rotate(165deg);
+}
+
+/* ─── Toggle de estilo ────────────────────────────────────────────────── */
+.tmap-style-toggle {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+.tmap-style-btn {
+  font-family: var(--tmap-font);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  background: rgba(2, 15, 35, 0.85);
+  border: 1px solid var(--tmap-border);
+  border-radius: 6px;
+  color: var(--tmap-text-dim);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.tmap-style-btn:hover {
+  color: var(--tmap-neon);
+  border-color: var(--tmap-neon-dim);
+}
+
+.tmap-style-btn--active {
+  color: var(--tmap-neon);
+  border-color: var(--tmap-neon);
+  box-shadow: 0 0 8px rgba(0, 234, 255, 0.25);
+}
+
+/* ─── Loading overlay ─────────────────────────────────────────────────── */
+.tmap-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(2, 12, 24, 0.9);
+  z-index: 20;
+}
+
+.tmap-loading__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tmap-neon);
+  animation: tmap-pulse 1.2s ease-in-out infinite;
+}
+
+.tmap-loading__dot:nth-child(2) { animation-delay: 0.2s; }
+.tmap-loading__dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes tmap-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1.1); box-shadow: 0 0 8px var(--tmap-neon); }
+}
+
+/* ─── Cantos decorativos ──────────────────────────────────────────────── */
+.tmap-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.tmap-corner--tl { top: 0;    left: 0;  border-top: 2px solid var(--tmap-neon); border-left:  2px solid var(--tmap-neon); }
+.tmap-corner--tr { top: 0;    right: 0; border-top: 2px solid var(--tmap-neon); border-right: 2px solid var(--tmap-neon); }
+.tmap-corner--bl { bottom: 0; left: 0;  border-bottom: 2px solid var(--tmap-neon); border-left:  2px solid var(--tmap-neon); }
+.tmap-corner--br { bottom: 0; right: 0; border-bottom: 2px solid var(--tmap-neon); border-right: 2px solid var(--tmap-neon); }
+
+/* ─── Responsivo ──────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .tmap-wrapper { height: 300px; }
+  .tmap-header__title { font-size: 1.05rem; }
+}
+
+/* ─── Pin avatar circular ─────────────────────────────────────────────── */
+.tmap-pin {
+  cursor: pointer;
+  /* Não adicionar position, margin, padding ou top/left aqui.
+     O centramento é feito via transform:translate(-50%,-50%) no JS. */
+}
+
+.tmap-pin__img {
+  display:       block;
+  width:         36px;
+  height:        36px;
+  border-radius: 50%;
+  object-fit:    cover;
+  border:        2px solid var(--tmap-neon);
+  box-shadow:    0 0 10px var(--tmap-neon), 0 0 20px rgba(0, 234, 255, 0.2);
+  transition:    transform 0.2s ease, box-shadow 0.2s ease;
+  user-select:   none;
+}
+
+/* ETIPI-specific larger pin for the Sede to improve visibility */
+.tmap-pin__img--etipi {
+  width: 52px;
+  height: 52px;
+  border-width: 3px;
+  box-shadow: 0 0 18px var(--tmap-neon), 0 0 36px rgba(0, 234, 255, 0.45);
+}
+
+.tmap-pin--hovered .tmap-pin__img {
+  transform:  scale(1.2);
+  box-shadow: 0 0 16px var(--tmap-neon), 0 0 32px rgba(0, 234, 255, 0.45);
+}
+
+.tmap-pin--hovered .tmap-pin__img--etipi {
+  transform: scale(1.28);
+  box-shadow: 0 0 22px var(--tmap-neon), 0 0 44px rgba(0, 234, 255, 0.55);
+}
+
+/* ─── Card de detalhes (clique no pin) ────────────────────────────────── */
+.tmap-card {
+  position:      absolute;
+  bottom:        20px;
+  right:         20px;
+  z-index:       15;
+  width:         220px;
+  background:    rgba(8, 18, 36, 0.96);
+  border:        1px solid rgba(0, 234, 255, 0.3);
+  border-radius: 12px;
+  padding:       14px;
+  backdrop-filter: blur(8px);
+  box-shadow:    0 0 24px rgba(0, 234, 255, 0.2), inset 0 0 16px rgba(0, 0, 30, 0.4);
+  animation:     tmap-card-in 0.25s ease-out both;
+}
+
+@keyframes tmap-card-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.tmap-card__close {
+  position:    absolute;
+  top:         8px;
+  right:       10px;
+  background:  transparent;
+  border:      none;
+  color:       var(--tmap-text-dim);
+  font-size:   1rem;
+  cursor:      pointer;
+  line-height: 1;
+  padding:     0;
+  transition:  color 0.15s;
+}
+.tmap-card__close:hover { color: var(--tmap-neon); }
+
+.tmap-card__avatar {
+  display:       block;
+  width:         52px;
+  height:        52px;
+  border-radius: 50%;
+  object-fit:    cover;
+  border:        2px solid var(--tmap-neon);
+  box-shadow:    0 0 10px rgba(0, 234, 255, 0.35);
+  margin:        0 auto 10px;
+}
+
+.tmap-card__body {
+  text-align: center;
+}
+
+.tmap-card__sigla {
+  font-family:    var(--tmap-font);
+  font-size:      0.62rem;
+  letter-spacing: 0.2em;
+  color:          var(--tmap-neon);
+  text-transform: uppercase;
+  margin:         0 0 2px;
+}
+
+.tmap-card__nome {
+  display:        block;
+  font-family:    var(--tmap-font);
+  font-size:      0.8rem;
+  font-weight:    700;
+  color:          var(--tmap-text);
+  margin-bottom:  6px;
+}
+
+.tmap-card__servico {
+  font-family: var(--tmap-font);
+  font-size:   0.72rem;
+  color:       rgba(0, 220, 255, 0.7);
+  margin:      0 0 4px;
+}
+
+.tmap-card__descricao {
+  font-family: var(--tmap-font);
+  font-size:   0.62rem;
+  color:       var(--tmap-text-dim);
+  line-height: 1.45;
+}
+
+/* ─── Área do mapa + painel (layout foco 70/30) ──────────────────────── */
+.tmap-map-area {
+  display:    flex;
+  width:      100%;
+  height:     420px;
+  transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow:   hidden;
+}
+
+.tmap-map-area--focus {
+  height: 740px;
+}
+
+/* ─── Colapso do cabeçalho ao selecionar pin ──────────────────────────── */
+.tmap-header {
+  transition: opacity 0.35s ease, transform 0.35s ease,
+              max-height 0.4s ease, margin-bottom 0.4s ease;
+  max-height:    120px;
+  overflow:      hidden;
+}
+
+.tmap-header--hidden {
+  opacity:        0;
+  transform:      translateX(-40px);
+  max-height:     0 !important;
+  margin-bottom:  0 !important;
+  pointer-events: none;
+}
+
+/* Expansão da seção quando um orgão é selecionado */
+.tmap-secao--expanded {
+  max-width: 100%;
+}
+
+/* ─── Painel lateral (modo foco 30%) ─────────────────────────────────── */
+.tmap-panel {
+  position:       relative;
+  z-index:        25;
+  flex-shrink:    0;
+  width:          0;
+  height:         100%;
+  overflow:       hidden;
+  opacity:        0;
+  transform:      translateX(40px);
+  transition:     width     0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity   0.4s ease,
+                  transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  background:     rgba(5, 14, 30, 0.97);
+  border-left:    1px solid rgba(0, 234, 255, 0.2);
+  border-radius:  0 var(--tmap-radius) var(--tmap-radius) 0;
+  box-shadow:     inset 4px 0 24px rgba(0, 180, 255, 0.06);
+  display:        flex;
+  flex-direction: column;
+  gap:            12px;
+  /* padding fica dentro de um inner para não vazar durante a transição */
+}
+
+.tmap-panel--visible {
+  width:     40%;
+  opacity:   1;
+  transform: translateX(0);
+  z-index:   50;
+  overflow-y: auto;
+  /* aumentar padding direito para empurrar conteúdo para o centro */
+  padding:   20px 64px 20px 18px;
+  /* allow absolutely positioned children (close button) to be visible */
+  overflow: visible;
+}
+
+/* ─── Internos do painel ──────────────────────────────────────────────── */
+.tmap-panel__close {
+  position:     absolute;
+  top:          12px;
+  right:        12px;
+  display:      inline-flex;
+  align-items:  center;
+  justify-content: center;
+  width:        36px;
+  height:       36px;
+  background:   rgba(0,0,0,0.28);
+  border:       none;
+  border-radius: 50%;
+  color:        #fff; /* close button white when panel open */
+  font-size:    1.1rem;
+  line-height:  1;
+  padding:      0;
+  cursor:       pointer;
+  transition:   background 0.12s, transform 0.12s, box-shadow 0.12s;
+  z-index:      9999;
+  pointer-events: auto;
+}
+.tmap-panel__close:hover {
+  background: rgba(0,0,0,0.42);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,234,255,0.08);
+  color: var(--tmap-neon);
+}
+
+/* Back arrow button (left/top) */
+.tmap-panel__back {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.25rem;
+  padding: 6px 8px;
+  cursor: pointer;
+  z-index: 100000;
+  border-radius: 6px;
+}
+.tmap-panel__back:hover { color: var(--tmap-neon); background: rgba(255,255,255,0.03); }
+
+.tmap-panel__avatar {
+  display:       block;
+  width:         min(520px, calc(90% - 32px));
+  aspect-ratio:  16/9;
+  height:        auto;
+  box-sizing: border-box;
+  max-height:    320px;
+  border-radius: 12px;
+  object-fit:    cover;
+    /* shift the visible area downward to reveal façade/logo;
+      nudge horizontally so right edge is visible */
+    object-position: 25% 70%;
+  border:        2px solid var(--tmap-neon);
+  box-shadow:    0 0 28px rgba(0, 234, 255, 0.55);
+  margin:        6px auto 18px;
+  flex-shrink:   0;
+  /* center the avatar inside the panel for a cleaner resumo format */
+  transform:     none;
+}
+
+/* Flip apenas para o card da sede (ETIPI) */
+.tmap-panel__avatar-flip {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  margin: 0;
+  position: relative;
+  perspective: 1200px;
+  overflow: hidden;
+}
+
+.tmap-panel__avatar-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform .65s ease;
+}
+
+.tmap-panel__avatar-flip:hover .tmap-panel__avatar-inner {
+  transform: rotateY(180deg);
+}
+
+.tmap-panel__avatar-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.tmap-panel__avatar-face .tmap-panel__avatar {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  margin: 0;
+  border: 2px solid rgba(0, 234, 255, 0.45);
+  border-radius: 12px;
+  box-shadow: 0 0 28px rgba(0, 234, 255, 0.55);
+  object-position: center 12%;
+}
+
+.tmap-panel__avatar-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+  background: rgba(2, 12, 24, 0.92);
+  padding: 2.5% 4%;
+  box-sizing: border-box;
+}
+
+.tmap-panel__avatar-back-photo {
+  width: auto;
+  height: 80%;
+  max-width: 92%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+  border: 2px solid rgba(0, 234, 255, 0.45);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.tmap-panel__avatar-back-caption {
+  width: 100%;
+  min-height: 15%;
+  padding: 0 12px;
+  text-align: center;
+  position: static;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tmap-panel__avatar-back-name {
+  font-family: var(--tmap-font);
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.tmap-panel__avatar-back-role {
+  font-size: .86rem;
+  color: var(--tmap-text);
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Durante o flip da ETIPI, ocultar dados textuais (nome e produtos) */
+.tmap-panel--etipi .tmap-panel__avatar-flip:hover ~ .tmap-panel__header,
+.tmap-panel--etipi .tmap-panel__avatar-flip:hover ~ .tmap-panel__divider,
+.tmap-panel--etipi .tmap-panel__avatar-flip:hover ~ .tmap-panel__servicos {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Card ETIPI reestruturado: flip completo sem conflito de conteúdo */
+.tmap-etipi-flip-card {
+  width: 100%;
+  min-height: 620px;
+  position: relative;
+  perspective: 1200px;
+  overflow: hidden;
+}
+
+.tmap-etipi-flip-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform .65s ease;
+}
+
+.tmap-etipi-flip-card:hover .tmap-etipi-flip-card__inner {
+  transform: rotateY(180deg);
+}
+
+.tmap-etipi-flip-card__face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.tmap-etipi-flip-card__front {
+  display: flex;
+  flex-direction: column;
+}
+
+.tmap-etipi-flip-card__front .tmap-panel__avatar {
+  width: min(520px, calc(90% - 32px));
+  aspect-ratio: 16/9;
+  max-height: 320px;
+  margin: 6px auto 18px;
+}
+
+.tmap-etipi-flip-card__back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 30px 86px 30px 26px;
+  box-sizing: border-box;
+  gap: 10px;
+  background: rgba(2, 12, 24, 0.92);
+}
+
+.tmap-etipi-flip-card__photo {
+  width: min(58%, 300px);
+  height: min(84%, 560px);
+  object-fit: cover;
+  border-radius: 18px;
+  border: 2px solid rgba(0, 234, 255, 0.45);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.tmap-etipi-flip-card__name {
+  font-family: var(--tmap-font);
+  font-size: 1.16rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.2;
+}
+
+.tmap-etipi-flip-card__role {
+  font-size: .9rem;
+  color: var(--tmap-text);
+  text-align: center;
+  margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .tmap-panel--visible { width: 100%; padding: 16px; }
+  .tmap-panel__avatar { width: calc(100% - 16px); aspect-ratio: 16/9; max-height: 220px; border-radius: 8px; transform: none; object-position: 25% 70%; box-sizing: border-box; }
+  .tmap-panel__header { transform: none; }
+}
+
+.tmap-panel__header {
+  text-align: center;
+  /* align header horizontally with the avatar shift */
+  transform: translateX(calc(-20% + 20px));
+  width: 100%;
+}
+
+.tmap-panel__sigla {
+  font-family:    var(--tmap-font);
+  font-size:      0.62rem;
+  letter-spacing: 0.22em;
+  color:          var(--tmap-neon);
+  text-transform: uppercase;
+  margin:         0 0 3px;
+}
+
+.tmap-panel__nome {
+  display:       block;
+  font-family:   var(--tmap-font);
+  font-size:     0.88rem;
+  font-weight:   700;
+  color:         var(--tmap-text);
+  margin-bottom: 5px;
+}
+
+.tmap-panel__descricao {
+  font-family: var(--tmap-font);
+  font-size:   0.68rem;
+  color:       var(--tmap-text-dim);
+  line-height: 1.5;
+  margin:      0;
+}
+
+.tmap-panel__divider {
+  height:           1px;
+  background:       linear-gradient(to right, transparent, rgba(0, 234, 255, 0.3), transparent);
+  flex-shrink:      0;
+}
+
+.tmap-panel__servicos {
+  flex: 1;
+}
+
+.tmap-panel__servicos-label {
+  font-family:    var(--tmap-font);
+  font-size:      0.58rem;
+  letter-spacing: 0.2em;
+  color:          var(--tmap-text-dim);
+  text-transform: uppercase;
+  margin:         0 0 8px;
+}
+
+.tmap-panel__lista {
+  list-style: none;
+  padding:    0;
+  margin:     0;
+  display:    flex;
+  flex-direction: column;
+  gap:        9px;
+}
+
+.tmap-panel__item {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+  font-family: var(--tmap-font);
+  font-size:   0.9rem;
+  color:       var(--tmap-text);
+  line-height: 1.4;
+}
+
+.tmap-panel__dot {
+  display:       block;
+  flex-shrink:   0;
+  width:         6px;
+  height:        6px;
+  border-radius: 50%;
+  background:    var(--tmap-neon);
+  box-shadow:    0 0 6px var(--tmap-neon);
+}
+
+/* ─── Responsivo: painel empilhado abaixo em telas pequenas ────────────── */
+@media (max-width: 640px) {
+  .tmap-map-area {
+    flex-direction: column;
+    height:         300px;
+  }
+  .tmap-map-area--focus {
+    height:         auto;
+  }
+  .tmap-wrapper,
+  .tmap-wrapper--focus {
+    width:  100%;
+    height: 300px;
+    border-radius: var(--tmap-radius) var(--tmap-radius) 0 0;
+  }
+  .tmap-panel {
+    width:   100%;
+    height:  0;
+    transform: translateY(20px);
+    border-left:   none;
+    border-top:    1px solid rgba(0, 234, 255, 0.2);
+    border-radius: 0 0 var(--tmap-radius) var(--tmap-radius);
+    transition:    height    0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                   opacity   0.4s ease,
+                   transform 0.5s ease;
+  }
+  .tmap-panel--visible {
+    width:     100%;
+    height:    auto;
+    max-height: 320px;
+    transform:  translateY(0);
+    padding:    16px;
+  }
+}

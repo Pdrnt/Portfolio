@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETIPI — Portfólio de Serviços e Produtos</title>
+<style>
+:root {
+  --navy: #0D1B3E;
+  --blue: #1565C0;
+  --blue-mid: #1976D2;
+  --blue-light: #42A5F5;
+  --red: #D32F2F;
+  --yellow: #F9A825;
+  --green: #2E7D32;
+  --teal: #37474F;
+  --white: #FFFFFF;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-400: #94A3B8;
+  --gray-600: #475569;
+  --gray-800: #1E293B;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--white); color: var(--gray-800); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4rem; height: 68px;
+  background: rgba(13,27,62,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: box-shadow 0.3s;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo .hex {
+  width: 36px; height: 36px;
+  background: var(--blue);
+  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 13px; color: white;
+}
+.nav-logo span { font-weight: 700; font-size: 1.2rem; color: white; }
+.nav-logo span b { color: var(--blue-light); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: white; }
+.nav-cta { background: var(--blue); color: white; border: none; border-radius: 6px; padding: 9px 20px; font-size: 0.875rem; font-weight: 600; cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+.nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0A1628 0%, #0D1B3E 55%, #112240 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding: 100px 4rem 5rem; text-align: center;
+}
+.hex-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.hex-bg div { position: absolute; clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%); animation: floatH 9s ease-in-out infinite; }
+.hex-bg div:nth-child(1){width:200px;height:200px;background:var(--blue);opacity:.1;top:-30px;right:12%;animation-delay:0s}
+.hex-bg div:nth-child(2){width:130px;height:130px;background:var(--red);opacity:.13;top:22%;right:6%;animation-delay:1.5s}
+.hex-bg div:nth-child(3){width:170px;height:170px;background:var(--yellow);opacity:.09;bottom:18%;right:14%;animation-delay:3s}
+.hex-bg div:nth-child(4){width:90px;height:90px;background:var(--green);opacity:.15;bottom:28%;left:6%;animation-delay:2s}
+.hex-bg div:nth-child(5){width:240px;height:240px;background:var(--teal);opacity:.07;top:28%;left:-70px;animation-delay:4s}
+.hex-bg div:nth-child(6){width:70px;height:70px;background:var(--blue-light);opacity:.18;top:12%;left:22%;animation-delay:.5s}
+@keyframes floatH{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(4deg)}}
+
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(21,101,192,.2); border: 1px solid rgba(66,165,245,.3);
+  color: var(--blue-light); border-radius: 100px;
+  padding: 5px 16px; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 1.5rem; animation: fadeD .7s ease both;
+}
+.hero-pill::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--blue-light); animation:pulse 2s infinite; }
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1.hero-h { font-size: clamp(2.4rem,4.5vw,3.8rem); font-weight: 800; color: white; line-height: 1.16; letter-spacing: -0.5px; margin-bottom: 1.25rem; animation: fadeD .7s .15s ease both; }
+h1.hero-h em { color: var(--blue-light); font-style: normal; }
+.hero-p { font-size: 1.05rem; color: rgba(255,255,255,.6); max-width: 560px; margin: 0 auto 2.25rem; line-height: 1.7; animation: fadeD .7s .3s ease both; }
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem; animation: fadeD .7s .45s ease both; }
+.btn-p { background:var(--blue);color:white;border:none;border-radius:8px;padding:13px 30px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;text-decoration:none;display:inline-block; }
+.btn-p:hover { background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(21,101,192,.4); }
+.btn-o { background:transparent;color:white;border:1.5px solid rgba(255,255,255,.3);border-radius:8px;padding:13px 30px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;text-decoration:none;display:inline-block; }
+.btn-o:hover { border-color:white;background:rgba(255,255,255,.08); }
+.hero-stats { display:flex;gap:3rem;justify-content:center;animation:fadeD .7s .6s ease both; }
+.stat { text-align:center; }
+.stat-n { font-size:2rem;font-weight:800;color:white;letter-spacing:-1px; }
+.stat-n em { color:var(--blue-light);font-style:normal; }
+.stat-l { font-size:.75rem;color:rgba(255,255,255,.45);margin-top:2px;text-transform:uppercase;letter-spacing:.5px; }
+.hero-cut { position:absolute;bottom:0;left:0;right:0;height:56px;background:white;clip-path:ellipse(55% 100% at 50% 100%); }
+@keyframes fadeD{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+
+.stripe { height:5px;background:linear-gradient(90deg,var(--green) 0%,var(--red) 25%,var(--yellow) 50%,var(--blue) 75%,#7B1FA2 100%); }
+
+/* SECTIONS */
+.sec { padding: 5rem 4rem; }
+.sec-alt { background: var(--gray-50); }
+.sec-dark { background: var(--navy); }
+.sec-lbl { display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:.6rem; }
+.sec-dark .sec-lbl { color:var(--blue-light); }
+.sec-title { font-size:clamp(1.75rem,3vw,2.4rem);font-weight:800;color:var(--navy);letter-spacing:-.4px;margin-bottom:.6rem; }
+.sec-dark .sec-title { color:white; }
+.sec-sub { color:var(--gray-600);font-size:.97rem;line-height:1.65;max-width:520px; }
+.sec-dark .sec-sub { color:rgba(255,255,255,.58); }
+
+/* CAROUSEL */
+.carousel-wrap { position:relative;overflow:hidden;margin-top:2.5rem; }
+.carousel-track { display:flex;gap:1.25rem;padding:.75rem 4rem;width:max-content;animation:scroll 60s linear infinite; }
+.carousel-track:hover { animation-play-state:paused; }
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.fade-l,.fade-r { position:absolute;top:0;bottom:0;width:110px;z-index:10;pointer-events:none; }
+.fade-l { left:0;background:linear-gradient(to right,white,transparent); }
+.fade-r { right:0;background:linear-gradient(to left,white,transparent); }
+
+/* PRODUCT CARD */
+.pc { flex-shrink:0;width:300px;background:white;border:1px solid var(--gray-200);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.06); }
+.pc:hover { transform:translateY(-5px);border-color:var(--blue);box-shadow:0 16px 40px rgba(13,27,62,.14); }
+.pc-img { width:100%;height:165px;object-fit:cover;display:block;background:var(--gray-100); }
+.pc-body { padding:1.25rem; }
+.pc-badge { display:inline-flex;align-items:center;gap:5px;font-size:.67rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;border-radius:100px;padding:3px 9px;margin-bottom:.75rem; }
+.b-super { background:rgba(21,101,192,.1);color:var(--blue); }
+.b-est   { background:rgba(211,47,47,.1);color:var(--red); }
+.b-trans { background:rgba(249,168,37,.1);color:#9A7000; }
+.pc-vert { font-size:.7rem;color:var(--gray-400);font-weight:500;text-transform:uppercase;letter-spacing:.4px;margin-bottom:.35rem; }
+.pc-name { font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem;line-height:1.3; }
+.pc-desc { font-size:.82rem;color:var(--gray-600);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden; }
+
+/* VERTICAIS */
+.vg { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.75rem; }
+.vc { background:white;border-radius:14px;padding:1.75rem;border:1px solid var(--gray-200);transition:all .3s;cursor:pointer;position:relative;overflow:hidden; }
+.vc::after { content:'';position:absolute;bottom:0;left:0;right:0;height:4px;opacity:0;transition:opacity .3s; }
+.vc:hover { transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1); }
+.vc:hover::after { opacity:1; }
+.vc-adm::after{background:var(--blue)} .vc-sau::after{background:#E53935} .vc-edu::after{background:var(--yellow)}
+.vc-seg::after{background:var(--green)} .vc-red::after{background:var(--teal)} .vc-gov::after{background:#7B1FA2}
+.vi { width:50px;height:50px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.1rem; }
+.vi-adm{background:rgba(21,101,192,.12)} .vi-sau{background:rgba(229,57,53,.1)} .vi-edu{background:rgba(249,168,37,.13)}
+.vi-seg{background:rgba(46,125,50,.1)} .vi-red{background:rgba(55,71,79,.1)} .vi-gov{background:rgba(123,31,162,.1)}
+.vc-t { font-size:.97rem;font-weight:700;color:var(--navy);margin-bottom:.45rem; }
+.vc-d { font-size:.83rem;color:var(--gray-600);line-height:1.6; }
+.vc-c { display:inline-block;margin-top:.9rem;font-size:.72rem;font-weight:700;color:var(--blue);background:rgba(21,101,192,.1);border-radius:100px;padding:3px 10px; }
+
+/* CATALOG */
+.prod-tabs { display:flex;gap:.5rem;flex-wrap:wrap;margin:1.75rem 0 2.25rem; }
+.tab { padding:7px 16px;border-radius:100px;border:1.5px solid var(--gray-200);background:white;cursor:pointer;font-family:var(--font);font-size:.83rem;font-weight:500;color:var(--gray-600);transition:all .2s; }
+.tab:hover { border-color:var(--blue);color:var(--blue); }
+.tab.on { background:var(--navy);border-color:var(--navy);color:white;font-weight:600; }
+.pg { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem; }
+.pi { border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;background:var(--gray-50);transition:all .25s;display:none;cursor:pointer; }
+.pi.show { display:block; }
+.pi:hover { border-color:var(--blue-light);box-shadow:0 8px 24px rgba(21,101,192,.1);background:white; }
+.pi-img { width:100%;height:190px;object-fit:cover;display:block;background:var(--gray-200); }
+.pi-body { padding:1.1rem; }
+.pi-top { display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;margin-bottom:.5rem; }
+.pi-name { font-size:.93rem;font-weight:700;color:var(--navy);line-height:1.3; }
+.pi-desc { font-size:.8rem;color:var(--gray-600);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden; }
+
+/* CLIENTES */
+.cases { display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2.75rem; }
+.cc { background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.5rem;transition:all .25s; }
+.cc:hover { background:rgba(255,255,255,.12);transform:translateY(-2px); }
+.cc-s { font-size:1.05rem;font-weight:700;color:var(--blue-light);margin-bottom:.5rem; }
+.cc-d { font-size:.83rem;color:rgba(255,255,255,.58);line-height:1.55; }
+.chips { display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.5rem; }
+.chip { background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:8px 18px;color:rgba(255,255,255,.82);font-weight:500;font-size:.86rem;transition:all .2s; }
+.chip:hover { background:rgba(255,255,255,.14); }
+
+/* CONTATO */
+#contato { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
+.ci-list { display:flex;flex-direction:column;gap:.9rem;margin-top:1.75rem; }
+.ci-item { display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;background:white;border-radius:10px;border:1px solid var(--gray-200); }
+.ci-ico { width:38px;height:38px;background:rgba(21,101,192,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0; }
+.ci-txt { font-size:.83rem;color:var(--gray-600); }
+.ci-txt strong { display:block;color:var(--navy);font-weight:600;margin-bottom:2px; }
+.contact-card { background:var(--navy);border-radius:18px;padding:2.5rem;color:white; }
+.contact-card h3 { font-size:1.4rem;font-weight:700;margin-bottom:.6rem; }
+.contact-card p { color:rgba(255,255,255,.6);margin-bottom:1.75rem;line-height:1.65;font-size:.92rem; }
+.fg { margin-bottom:.85rem; }
+.fg input,.fg select,.fg textarea { width:100%;padding:11px 14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:8px;color:white;font-family:var(--font);font-size:.88rem;outline:none;transition:border-color .2s; }
+.fg input::placeholder,.fg textarea::placeholder { color:rgba(255,255,255,.33); }
+.fg input:focus,.fg select:focus,.fg textarea:focus { border-color:var(--blue-light); }
+.fg select { color:rgba(255,255,255,.65); }
+.fg select option { background:var(--navy);color:white; }
+.fg textarea { height:90px;resize:none; }
+.fg2 { display:grid;grid-template-columns:1fr 1fr;gap:.85rem; }
+.btn-sub { width:100%;padding:13px;background:var(--blue);border:none;border-radius:8px;color:white;font-family:var(--font);font-size:.97rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:.4rem; }
+.btn-sub:hover { background:var(--blue-mid);transform:translateY(-1px); }
+
+/* FOOTER */
+footer { background:var(--navy);padding:2.5rem 4rem 1.75rem;border-top:1px solid rgba(255,255,255,.07); }
+.ft { display:flex;justify-content:space-between;align-items:center;padding-bottom:1.75rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:1.5rem; }
+.fl { font-weight:800;font-size:1.4rem;color:white; }
+.fl b { color:var(--blue-light); }
+.ft-tag { color:rgba(255,255,255,.38);font-size:.76rem;margin-top:3px; }
+.fb { color:rgba(255,255,255,.3);font-size:.76rem;display:flex;justify-content:space-between; }
+.fc { height:4px;width:100%;border-radius:2px;background:linear-gradient(90deg,var(--green) 25%,var(--red) 25%,var(--red) 50%,var(--yellow) 50%,var(--yellow) 75%,var(--blue) 75%);margin-top:1.5rem; }
+
+/* REVEAL */
+.rev { opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s; }
+.rev.in { opacity:1;transform:translateY(0); }
+
+@media(max-width:1024px){
+  nav{padding:0 1.5rem} .nav-links{display:none}
+  #hero,.sec,#contato,footer{padding-left:1.5rem;padding-right:1.5rem}
+  .vg{grid-template-columns:1fr 1fr} .pg{grid-template-columns:1fr 1fr}
+  .cases{grid-template-columns:1fr 1fr} #contato{grid-template-columns:1fr;gap:2.5rem}
+}
+@media(max-width:640px){
+  .hero-stats{gap:1.5rem} .vg{grid-template-columns:1fr}
+  .pg{grid-template-columns:1fr} .fg2{grid-template-columns:1fr}
+}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:2rem}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-panel{background:white;border-radius:18px;width:min(1000px,96vw);max-height:92vh;overflow-y:auto;transform:translateY(30px);transition:transform .3s;position:relative}
+.modal-overlay.open .modal-panel{transform:translateY(0)}
+.modal-img{width:100%;height:260px;object-fit:cover;border-radius:18px 18px 0 0;background:var(--gray-200);display:block}
+.modal-body{padding:2rem 2.5rem 2.5rem}
+.modal-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;background:rgba(255,255,255,.9);border:none;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 2px 8px rgba(0,0,0,.15);line-height:1}
+.modal-vert{font-size:.72rem;color:var(--gray-400);font-weight:500;text-transform:uppercase;letter-spacing:.4px;margin-bottom:.35rem}
+.modal-name{font-size:1.8rem;font-weight:800;color:var(--navy);margin-bottom:1rem;line-height:1.2}
+.modal-intro{color:var(--gray-600);line-height:1.7;font-size:.95rem;margin-bottom:1.5rem}
+.modal-pv-title{font-size:.75rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;border-bottom:2px solid var(--blue);padding-bottom:.5rem;margin-bottom:1rem;display:inline-block}
+.modal-pv{color:var(--gray-600);line-height:1.7;font-size:.92rem}
+.modal-pv strong{color:var(--navy)}
+.modal-pv ul{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.65rem 2rem}
+@media(max-width:600px){.modal-pv ul{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <img src="images/logo.png" alt="ETIPI" style="height:48px;width:auto;display:block;border-radius:10px;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#carousel">Produtos</a></li>
+    <li><a href="#verticais">Verticais</a></li>
+    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="#clientes">Clientes</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Fale Conosco</button>
+</nav>
+
+<section id="hero">
+  <div class="hex-bg"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  <div class="hero-pill">A Casa da Tecnologia</div>
+  <h1 class="hero-h">Soluções em Tecnologia e<br><em>Inovação a Serviço</em><br>do Cidadão</h1>
+  <p class="hero-p">A ETIPI é a Empresa de Tecnologia da Informação do Estado do Piauí — desenvolvemos plataformas digitais que modernizam a gestão pública e transformam a vida dos cidadãos.</p>
+  <div class="hero-btns">
+    <a href="#carousel" class="btn-p">Ver Portfólio Completo</a>
+    <a href="#contato" class="btn-o">Contratar sem Licitação</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">30<em>+</em></div><div class="stat-l">Produtos & Serviços</div></div>
+    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Verticais de Inovação</div></div>
+    <div class="stat"><div class="stat-n">5<em>+</em></div><div class="stat-l">Estados Atendidos</div></div>
+    <div class="stat"><div class="stat-n">300<em>+</em></div><div class="stat-l">Serviços Digitais</div></div>
+  </div>
+  <div class="hero-cut"></div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- CAROUSEL -->
+<section class="sec" id="carousel">
+  <div class="rev">
+    <span class="sec-lbl">Destaques do Portfólio</span>
+    <h2 class="sec-title">Super Produtos & Soluções</h2>
+    <p class="sec-sub">Conheça as principais soluções que transformam a gestão pública em todo o Brasil.</p>
+  </div>
+  <div class="carousel-wrap">
+    <div class="fade-l"></div>
+    <div class="fade-r"></div>
+    <div class="carousel-track" id="ct">
+      <div class="pc" onclick="openProduct('telessaude')"><img class="pc-img" src="images/Telessáude.png" alt="Telessaúde"><div class="pc-body"><div class="pc-badge b-super">⭐ Super Produto</div><div class="pc-vert">Vertical de Saúde</div><div class="pc-name">Telessaúde Digital</div><div class="pc-desc">Plataforma estadual de telemedicina com teleconsultas 24h, telediagnósticos e IA para priorização de casos. Cases: Amazonas e Pará.</div></div></div>
+      <div class="pc" onclick="openProduct('siape')"><img class="pc-img" src="images/siape.png" alt="SIAPE"><div class="pc-body"><div class="pc-badge b-super">⭐ Super Produto</div><div class="pc-vert">Vertical de Administração</div><div class="pc-name">SIAPE — Gestão de Pessoas</div><div class="pc-desc">Plataforma integrada de RH: cadastro funcional, folha, frequência e carreira com motor de regras parametrizável e conformidade LGPD.</div></div></div>
+      <div class="pc" onclick="openProduct('govpi')"><img class="pc-img" src="images/Gov.Pi.png" alt="Gov.Pi"><div class="pc-body"><div class="pc-badge b-super">⭐ Super Produto</div><div class="pc-vert">Governo Digital</div><div class="pc-name">Gov.Pi</div><div class="pc-desc">Portal digital com 300+ serviços públicos integrados ao Gov.br. Login único para cidadãos, servidores e empresas com soberania digital.</div></div></div>
+      <div class="pc" onclick="openProduct('cellguard')"><img class="pc-img" src="images/Cell Guard.png" alt="Cell Guard"><div class="pc-body"><div class="pc-badge b-super">⭐ Super Produto</div><div class="pc-vert">Segurança Pública e Trânsito</div><div class="pc-name">Cell Guard</div><div class="pc-desc">Plataforma de segurança com IA para rastreamento e recuperação de celulares roubados, integrando forças policiais e operadoras.</div></div></div>
+      <div class="pc" onclick="openProduct('bofacil')"><img class="pc-img" src="images/B.O Fácil.png" alt="B.O. Fácil"><div class="pc-body"><div class="pc-badge b-super">⭐ Super Produto</div><div class="pc-vert">Segurança Pública e Trânsito</div><div class="pc-name">B.O. Fácil</div><div class="pc-desc">Moderniza o registro de Boletins de Ocorrência com arquitetura Data Lakehouse e integração nacional. B.O. pelo WhatsApp.</div></div></div>
+      <div class="pc" onclick="openProduct('primeirainfancia')"><img class="pc-img" src="images/Plataforma da Primeira Infância.png" alt="Primeira Infância"><div class="pc-body"><div class="pc-badge b-super">⭐ Super Produto</div><div class="pc-vert">Vertical de Educação</div><div class="pc-name">Plataforma da Primeira Infância</div><div class="pc-desc">Gestão integral de crianças 0–6 anos: saúde, educação, assistência social e parentalidade. Alinhada ao framework OMS/UNICEF.</div></div></div>
+      <div class="pc" onclick="openProduct('cin')"><img class="pc-img" src="images/Serviço de Identificação e Carteiras.png" alt="CIN"><div class="pc-body"><div class="pc-badge b-super">⭐ Super Produto</div><div class="pc-vert">Segurança Pública e Trânsito</div><div class="pc-name">Serviço de Identificação CIN</div><div class="pc-desc">Emissão e gestão da Carteira de Identidade Nacional com biometria facial, OCR, prova de vida e assinatura eletrônica.</div></div></div>
+      <div class="pc" onclick="openProduct('govspace')"><img class="pc-img" src="images/GOVSPACE.png" alt="GOV.SPACE"><div class="pc-body"><div class="pc-badge b-est">🔹 Produto Estratégico</div><div class="pc-vert">Vertical de Administração</div><div class="pc-name">GOV.SPACE</div><div class="pc-desc">Suite com GovMail, GovDrive e Gov.Meet. Substitui plataformas privadas com soberania digital e criptografia ponta a ponta.</div></div></div>
+      <div class="pc" onclick="openProduct('papiro')"><img class="pc-img" src="images/Papiro.png" alt="Papiro"><div class="pc-body"><div class="pc-badge b-est">🔹 Produto Estratégico</div><div class="pc-vert">Vertical de Administração</div><div class="pc-name">Papiro — IA para Documentos</div><div class="pc-desc">Plataforma documental com IA e OCR avançado: classifica documentos, extrai metadados e automatiza publicação no Diário Oficial.</div></div></div>
+      <div class="pc" onclick="openProduct('emit')"><img class="pc-img" src="images/EMIT.png" alt="EMIT"><div class="pc-body"><div class="pc-badge b-est">🔹 Produto Estratégico</div><div class="pc-vert">Vertical de Administração</div><div class="pc-name">EMIT — Inteligência Tributária</div><div class="pc-desc">Ecossistema municipal 100% web com motor de cálculo, arrecadação, dívida ativa e atendimento digital ao contribuinte.</div></div></div>
+      <div class="pc" onclick="openProduct('sincin')"><img class="pc-img" src="images/SINCIN.png" alt="SINCIN"><div class="pc-body"><div class="pc-badge b-est">🔹 Produto Estratégico</div><div class="pc-vert">Vertical de Administração</div><div class="pc-name">SINCIN — Gestão de Contratos</div><div class="pc-desc">Sistema de controle interno em nuvem para fiscalização de contratos públicos, análise de empenhos e prestação de contas.</div></div></div>
+      <div class="pc" onclick="openProduct('educacorp')"><img class="pc-img" src="images/EducaCorp.png" alt="EducaCorp"><div class="pc-body"><div class="pc-badge b-est">🔹 Produto Estratégico</div><div class="pc-vert">Vertical de Educação</div><div class="pc-name">EducaCorp</div><div class="pc-desc">Plataforma governamental de educação corporativa com AVA, trilhas, certificados e integração Gov.br para o setor público.</div></div></div>
+      <div class="pc" onclick="openProduct('ensinus')"><img class="pc-img" src="images/Ensinus.png" alt="Ensinus"><div class="pc-body"><div class="pc-badge b-est">🔹 Produto Estratégico</div><div class="pc-vert">Vertical de Educação</div><div class="pc-name">Ensinus</div><div class="pc-desc">Plataforma de educação pública para gestores, professores, alunos e famílias. Notificações automáticas e dashboards em tempo real.</div></div></div>
+      <div class="pc" onclick="openProduct('soc')"><img class="pc-img" src="images/SOC.png" alt="SOC"><div class="pc-body"><div class="pc-badge b-trans">🟡 Serviço Transversal</div><div class="pc-vert">Redes e Serviços de TI</div><div class="pc-name">SOC — Segurança Cibernética</div><div class="pc-desc">Centro especializado em monitoramento 24x7 com SIEM, EDR e automação de resposta a incidentes. Conformidade LGPD garantida.</div></div></div>
+      <div class="pc" onclick="openProduct('nuvem')"><img class="pc-img" src="images/Computação em Nuvem.png" alt="Nuvem"><div class="pc-body"><div class="pc-badge b-trans">🟡 Serviço Transversal</div><div class="pc-vert">Redes e Serviços de TI</div><div class="pc-name">Computação em Nuvem</div><div class="pc-desc">Modelo híbrido on-premise com AWS, Google Cloud e Oracle Cloud. Escalabilidade sob demanda para picos de uso governamental.</div></div></div>
+      <div class="pc" onclick="openProduct('prontuario')"><img class="pc-img" src="images/Prontuario.png" alt="Prontuário"><div class="pc-body"><div class="pc-badge b-est">🔹 Produto Estratégico</div><div class="pc-vert">Vertical de Saúde</div><div class="pc-name">Prontuário Eletrônico</div><div class="pc-desc">Plataforma que unifica dados de saúde integrada ao e-SUS e Conecte SUS. Agendamento, filas e conformidade LGPD.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VERTICAIS -->
+<section class="sec sec-alt" id="verticais">
+  <div class="rev">
+    <span class="sec-lbl">Áreas de Atuação</span>
+    <h2 class="sec-title">Verticais de Inovação</h2>
+    <p class="sec-sub">Seis frentes estratégicas cobrindo todas as necessidades da gestão pública digital.</p>
+  </div>
+  <div class="vg">
+    <div class="vc vc-adm rev"><div class="vi vi-adm">⚙️</div><div class="vc-t">Administração</div><div class="vc-d">Automação de processos, sistemas financeiros, fiscais, gestão de pessoas e governança pública.</div><span class="vc-c">10 soluções</span></div>
+    <div class="vc vc-sau rev"><div class="vi vi-sau">🏥</div><div class="vc-t">Saúde</div><div class="vc-d">Telessaúde, prontuário eletrônico, gestão hospitalar, IA para prontuários e atendimento a servidores.</div><span class="vc-c">6 soluções</span></div>
+    <div class="vc vc-edu rev"><div class="vi vi-edu">📚</div><div class="vc-t">Educação</div><div class="vc-d">Plataformas para escolas públicas, educação corporativa, primeira infância e mediação tecnológica.</div><span class="vc-c">4 soluções</span></div>
+    <div class="vc vc-seg rev"><div class="vi vi-seg">🛡️</div><div class="vc-t">Segurança Pública e Trânsito</div><div class="vc-d">Identificação civil, rastreamento de dispositivos, registro de ocorrências e gestão de fundos.</div><span class="vc-c">4 soluções</span></div>
+    <div class="vc vc-red rev"><div class="vi vi-red">🌐</div><div class="vc-t">Redes e Serviços de TI</div><div class="vc-d">Data center Tier III, conectividade por fibra e satélite, NOC, SOC, HaaS e nuvem governamental.</div><span class="vc-c">13 soluções</span></div>
+    <div class="vc vc-gov rev"><div class="vi vi-gov">🏛️</div><div class="vc-t">Governo Digital</div><div class="vc-d">Digitalização e acessibilidade ao cidadão com 300+ serviços integrados ao Gov.br.</div><span class="vc-c">1 super produto</span></div>
+  </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section class="sec" id="catalogo">
+  <div class="rev">
+    <span class="sec-lbl">Catálogo Completo</span>
+    <h2 class="sec-title">Todos os Produtos</h2>
+    <p class="sec-sub">Explore o portfólio completo filtrando por vertical de atuação.</p>
+  </div>
+  <div class="prod-tabs">
+    <button class="tab on" onclick="filt('todos',this)">Todos</button>
+    <button class="tab" onclick="filt('super',this)">⭐ Super Produtos</button>
+    <button class="tab" onclick="filt('adm',this)">Administração</button>
+    <button class="tab" onclick="filt('sau',this)">Saúde</button>
+    <button class="tab" onclick="filt('edu',this)">Educação</button>
+    <button class="tab" onclick="filt('seg',this)">Segurança</button>
+    <button class="tab" onclick="filt('red',this)">Redes & TI</button>
+    <button class="tab" onclick="filt('gov',this)">Governo Digital</button>
+  </div>
+  <div class="pg" id="pg">
+    <!-- ADMINISTRAÇÃO -->
+    <div class="pi show" data-c="adm" data-type="super" onclick="openProduct('siape')"><img class="pi-img" src="images/siape.png" alt="SIAPE"><div class="pi-body"><div class="pi-top"><div class="pi-name">SIAPE — Gestão de Pessoas</div><span class="pc-badge b-super" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">⭐ Super</span></div><div class="pi-desc">Plataforma integrada de RH com folha, frequência, carreira, biometria e conformidade LGPD.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('pdtic')"><img class="pi-img" src="images/pdtic.png" alt="PDTIC"><div class="pi-body"><div class="pi-top"><div class="pi-name">Consultoria para PDTIC</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Elaboração de PDTIC, Planejamento Estratégico de TI e Plano Anual de Contratações.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('guardvisio')"><img class="pi-img" src="images/Guardvisio.png" alt="Guardvisio"><div class="pi-body"><div class="pi-top"><div class="pi-name">Guardvisio</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Gestão de ativos mobiliários e manutenções com georreferenciamento e app offline.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('credencia')"><img class="pi-img" src="images/CREDENCIA.png" alt="CREDENCIA"><div class="pi-body"><div class="pi-top"><div class="pi-name">CREDENCIA</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Plataforma de credenciamentos públicos com editais digitais e conformidade Lei 14.133/2021.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('sincin')"><img class="pi-img" src="images/SINCIN.png" alt="SINCIN"><div class="pi-body"><div class="pi-top"><div class="pi-name">SINCIN — Gestão de Contratos</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Sistema de controle interno para fiscalização de contratos e análise de despesas públicas.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('govspace')"><img class="pi-img" src="images/GOVSPACE.png" alt="GOV.SPACE"><div class="pi-body"><div class="pi-top"><div class="pi-name">GOV.SPACE</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Suite com GovMail, GovDrive e Gov.Meet. Soberania digital e criptografia ponta a ponta.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('sigrp')"><img class="pi-img" src="images/SIGRP.png" alt="SIGRP"><div class="pi-body"><div class="pi-top"><div class="pi-name">SIGRP — Gestão de Repasses</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Gestão de convênios, emendas parlamentares e transferências com rastreabilidade completa.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('papiro')"><img class="pi-img" src="images/Papiro.png" alt="Papiro"><div class="pi-body"><div class="pi-top"><div class="pi-name">Papiro — IA para Documentos</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Plataforma documental com IA, OCR avançado e indexação semântica para a gestão pública.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('emit')"><img class="pi-img" src="images/EMIT.png" alt="EMIT"><div class="pi-body"><div class="pi-top"><div class="pi-name">EMIT — Inteligência Tributária</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Ecossistema tributário municipal 100% web com motor de cálculo e atendimento digital.</div></div></div>
+    <div class="pi show" data-c="adm" onclick="openProduct('extracash')"><img class="pi-img" src="images/Extracash.png" alt="Extracash"><div class="pi-body"><div class="pi-top"><div class="pi-name">Extracash</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Programa de cashback e benefícios financeiros para servidores públicos com rede de parceiros.</div></div></div>
+    <!-- SAÚDE -->
+    <div class="pi show" data-c="sau" data-type="super" onclick="openProduct('telessaude')"><img class="pi-img" src="images/Telessáude.png" alt="Telessaúde"><div class="pi-body"><div class="pi-top"><div class="pi-name">Telessaúde Digital</div><span class="pc-badge b-super" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">⭐ Super</span></div><div class="pi-desc">Telemedicina estadual com teleconsultas 24h, telediagnósticos e IA. Cases: Amazonas e Pará.</div></div></div>
+    <div class="pi show" data-c="sau" onclick="openProduct('prontuario')"><img class="pi-img" src="images/Prontuario.png" alt="Prontuário"><div class="pi-body"><div class="pi-top"><div class="pi-name">Prontuário Eletrônico</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Unifica dados de saúde integrado ao e-SUS e Conecte SUS. Agendamento e gestão de filas.</div></div></div>
+    <div class="pi show" data-c="sau" onclick="openProduct('pacienteintegrado')"><img class="pi-img" src="images/Paciente Integrado.png" alt="Paciente Integrado"><div class="pi-body"><div class="pi-top"><div class="pi-name">Paciente Integrado</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Gestão hospitalar com mapa cirúrgico, controle de OPMEs e acompanhamento em tempo real.</div></div></div>
+    <div class="pi show" data-c="sau" onclick="openProduct('iaprontuarios')"><img class="pi-img" src="images/IA para Prontuários.png" alt="IA Prontuários"><div class="pi-body"><div class="pi-top"><div class="pi-name">IA para Prontuários</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">IA que analisa e estrutura dados clínicos de prontuários para apoio à decisão médica.</div></div></div>
+    <div class="pi show" data-c="sau" onclick="openProduct('gestorsaude')"><img class="pi-img" src="images/Gestor Saúde.png" alt="Gestor Saúde"><div class="pi-body"><div class="pi-top"><div class="pi-name">Gestor Saúde</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Gestão assistencial integrada com carteirinha digital e auditoria preditiva por IA. IASPI Saúde.</div></div></div>
+    <div class="pi show" data-c="sau" onclick="openProduct('spectrum')"><img class="pi-img" src="images/Spectrum.png" alt="Spectrum"><div class="pi-body"><div class="pi-top"><div class="pi-name">Spectrum</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Plataforma para gestão do cuidado de pessoas neurodivergentes com prontuário e teleatendimento.</div></div></div>
+    <!-- EDUCAÇÃO -->
+    <div class="pi show" data-c="edu" data-type="super" onclick="openProduct('primeirainfancia')"><img class="pi-img" src="images/Plataforma da Primeira Infância.png" alt="Primeira Infância"><div class="pi-body"><div class="pi-top"><div class="pi-name">Plataforma da Primeira Infância</div><span class="pc-badge b-super" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">⭐ Super</span></div><div class="pi-desc">Gestão integral de crianças 0–6 anos. Saúde, educação, assistência social e parentalidade.</div></div></div>
+    <div class="pi show" data-c="edu" onclick="openProduct('educacorp')"><img class="pi-img" src="images/EducaCorp.png" alt="EducaCorp"><div class="pi-body"><div class="pi-top"><div class="pi-name">EducaCorp</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Educação corporativa governamental com AVA, trilhas, certificados e integração Gov.br.</div></div></div>
+    <div class="pi show" data-c="edu" onclick="openProduct('ensinus')"><img class="pi-img" src="images/Ensinus.png" alt="Ensinus"><div class="pi-body"><div class="pi-top"><div class="pi-name">Ensinus</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Plataforma de educação pública com notificações automáticas e dashboards. Case: SEMED Timon-MA.</div></div></div>
+    <div class="pi show" data-c="edu" onclick="openProduct('mediaotecnologica')"><img class="pi-img" src="images/Plataforma de Mediação Tecnológic.png" alt="Mediação"><div class="pi-body"><div class="pi-top"><div class="pi-name">Plataforma de Mediação Tecnológica</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">EAD com IA adaptativa, transmissão ao vivo e suporte a +500 mil usuários simultâneos.</div></div></div>
+    <!-- SEGURANÇA -->
+    <div class="pi show" data-c="seg" data-type="super" onclick="openProduct('cin')"><img class="pi-img" src="images/Serviço de Identificação e Carteiras.png" alt="CIN"><div class="pi-body"><div class="pi-top"><div class="pi-name">Serviço de Identificação CIN</div><span class="pc-badge b-super" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">⭐ Super</span></div><div class="pi-desc">Emissão da Carteira de Identidade Nacional com biometria facial, OCR e assinatura eletrônica.</div></div></div>
+    <div class="pi show" data-c="seg" data-type="super" onclick="openProduct('cellguard')"><img class="pi-img" src="images/Cell Guard.png" alt="Cell Guard"><div class="pi-body"><div class="pi-top"><div class="pi-name">Cell Guard</div><span class="pc-badge b-super" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">⭐ Super</span></div><div class="pi-desc">IA para rastreamento e recuperação de celulares roubados integrando forças policiais e operadoras.</div></div></div>
+    <div class="pi show" data-c="seg" data-type="super" onclick="openProduct('bofacil')"><img class="pi-img" src="images/B.O Fácil.png" alt="B.O. Fácil"><div class="pi-body"><div class="pi-top"><div class="pi-name">B.O. Fácil</div><span class="pc-badge b-super" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">⭐ Super</span></div><div class="pi-desc">Registro de Boletins de Ocorrência com Data Lakehouse e integração nacional. B.O. pelo WhatsApp.</div></div></div>
+    <div class="pi show" data-c="seg" onclick="openProduct('integrafisp')"><img class="pi-img" src="images/IntegraFISP.png" alt="IntegraFISP"><div class="pi-body"><div class="pi-top"><div class="pi-name">IntegraFISP</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Integração dos Fundos Nacional e Estadual de Segurança Pública com controle físico e financeiro.</div></div></div>
+    <!-- REDES & TI -->
+    <div class="pi show" data-c="red" onclick="openProduct('colocation')"><img class="pi-img" src="images/Colocation.png" alt="Colocation"><div class="pi-body"><div class="pi-top"><div class="pi-name">Colocation</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Hospedagem em Data Center Tier III com energia redundante e segurança física 24x7.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('conectinfra')"><img class="pi-img" src="images/Conectividade: Infraestrutura.png" alt="Conectividade"><div class="pi-body"><div class="pi-top"><div class="pi-name">Conectividade — Infraestrutura</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Cabeamento estruturado, intranets, soluções POL e redes wireless corporativas.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('conectlinks')"><img class="pi-img" src="images/Conectividade: Links de Internet.png" alt="Links"><div class="pi-body"><div class="pi-top"><div class="pi-name">Conectividade — Links de Internet</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Links por fibra óptica, satélite e PAP em todo o Piauí via subsidiária PiauíLink.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('haas')"><img class="pi-img" src="images/HaaS.png" alt="HaaS"><div class="pi-body"><div class="pi-top"><div class="pi-name">HaaS — Hardware as a Service</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Estações de trabalho, servidores e equipamentos TI em assinatura mensal. CAPEX → OPEX.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('noc')"><img class="pi-img" src="images/NOC.png" alt="NOC"><div class="pi-body"><div class="pi-top"><div class="pi-name">NOC — Network Operation Center</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Monitoramento 24x7 de redes com dashboard em tempo real e resposta imediata a falhas.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('soc')"><img class="pi-img" src="images/SOC.png" alt="SOC"><div class="pi-body"><div class="pi-top"><div class="pi-name">SOC — Security Operations Center</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Cibersegurança 24x7 com SIEM, EDR e automação de resposta a incidentes.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('licencas')"><img class="pi-img" src="images/Licenças de Produtividade Digital.png" alt="Licenças"><div class="pi-body"><div class="pi-top"><div class="pi-name">Licenças de Produtividade Digital</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Microsoft 365, Google Workspace, ClickUp, Canva Pro e Kaspersky com gestão centralizada.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('nuvem')"><img class="pi-img" src="images/Computação em Nuvem.png" alt="Nuvem"><div class="pi-body"><div class="pi-top"><div class="pi-name">Computação em Nuvem</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Modelo híbrido on-premise com AWS, Google Cloud e Oracle Cloud. Escalabilidade sob demanda.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('fabricasoftware')"><img class="pi-img" src="images/Fabrica de Software.png" alt="Fábrica"><div class="pi-body"><div class="pi-top"><div class="pi-name">Fábrica de Software</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Desenvolvimento sob medida com metodologias ágeis, integração Gov.br e LGPD.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('sei')"><img class="pi-img" src="images/SEI.png" alt="SEI"><div class="pi-body"><div class="pi-top"><div class="pi-name">Implantação e Suporte S.E.I</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Consultoria completa, implantação e suporte do Sistema Eletrônico de Informações.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('lgpd')"><img class="pi-img" src="images/Adequação para LGPD.png" alt="LGPD"><div class="pi-body"><div class="pi-top"><div class="pi-name">Adequação para LGPD</div><span class="pc-badge b-est" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🔹 Estrat.</span></div><div class="pi-desc">Diagnóstico, mapeamento de dados, DPO, treinamentos e plataformas de conformidade.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('cyberseguranca')"><img class="pi-img" src="images/Solução em Cybersegurança.png" alt="Cyber"><div class="pi-body"><div class="pi-top"><div class="pi-name">Solução em Cybersegurança</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Proteção com NGFW, EDR/XDR, backup, RTO/RPO e resposta a ransomware.</div></div></div>
+    <div class="pi show" data-c="red" onclick="openProduct('certificadodigital')"><img class="pi-img" src="images/Certificado Digital.png" alt="Certificado"><div class="pi-body"><div class="pi-top"><div class="pi-name">Certificado Digital</div><span class="pc-badge b-trans" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">🟡 Transv.</span></div><div class="pi-desc">Emissão de certificados digitais como Autoridade de Registro vinculada à ICP-Brasil.</div></div></div>
+    <!-- GOVERNO DIGITAL -->
+    <div class="pi show" data-c="gov" data-type="super" onclick="openProduct('govpi')"><img class="pi-img" src="images/Gov.Pi.png" alt="Gov.Pi"><div class="pi-body"><div class="pi-top"><div class="pi-name">Gov.Pi</div><span class="pc-badge b-super" style="font-size:.62rem;padding:2px 7px;white-space:nowrap">⭐ Super</span></div><div class="pi-desc">Portal com 300+ serviços públicos integrados ao Gov.br para cidadãos, servidores e empresas.</div></div></div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="sec sec-dark" id="clientes">
+  <div class="rev">
+    <span class="sec-lbl">Nossos Clientes</span>
+    <h2 class="sec-title">Atuamos em Todo o Brasil</h2>
+    <p class="sec-sub">Atendemos órgãos públicos estaduais, municipais e autarquias, levando tecnologia que transforma a gestão pública.</p>
+  </div>
+  <div class="cases rev">
+    <div class="cc"><div class="cc-s">🌿 Amazonas</div><div class="cc-d">Telessaúde Digital no programa Saúde AM Digital, levando atendimento especializado a regiões remotas.</div></div>
+    <div class="cc"><div class="cc-s">🌳 Pará</div><div class="cc-d">Telessaúde IASEP com teleconsultas para segurados e dependentes do Instituto de Assistência dos Servidores.</div></div>
+    <div class="cc"><div class="cc-s">🌻 Pernambuco</div><div class="cc-d">Parcerias em gestão de estoque e saúde pública, incluindo o Credencia PE na administração.</div></div>
+    <div class="cc"><div class="cc-s">🌾 Goiás</div><div class="cc-d">Implantação do Sistema de Gestão de Pessoas para modernização da administração de servidores.</div></div>
+  </div>
+  <div class="chips rev">
+    <div class="chip">Governo do Piauí</div><div class="chip">Secretarias Estaduais</div>
+    <div class="chip">Prefeituras Municipais</div><div class="chip">Poder Judiciário</div>
+    <div class="chip">Ministério Público</div><div class="chip">Autarquias</div>
+    <div class="chip">Controladoria Geral</div><div class="chip">Tribunais de Contas</div>
+    <div class="chip">Consórcios Municipais</div><div class="chip">IASPI Saúde</div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="sec sec-alt" id="contato">
+  <div class="rev">
+    <span class="sec-lbl">Entre em Contato</span>
+    <h2 class="sec-title">Converse com a ETIPI</h2>
+    <p class="sec-sub">Sabemos qual a melhor solução para a gestão pública. Nossa equipe está pronta para apresentar as opções ideais para o seu órgão.</p>
+    <div class="ci-list">
+      <div class="ci-item"><div class="ci-ico">📍</div><div class="ci-txt"><strong>Endereço</strong>Av. Pedro Freitas, 1900, Bairro São Pedro, Teresina/PI — CEP 64018-900</div></div>
+      <div class="ci-item"><div class="ci-ico">📧</div><div class="ci-txt"><strong>E-mail Comercial</strong>DIN@ETIPI.PI.GOV.BR</div></div>
+      <div class="ci-item"><div class="ci-ico">🌐</div><div class="ci-txt"><strong>Portal Oficial</strong>WWW.ETIPI.PI.GOV.BR</div></div>
+      <div class="ci-item"><div class="ci-ico">⚖️</div><div class="ci-txt"><strong>Contratação Direta</strong>Dispensa de licitação — Art. 75, IX, Lei nº 14.133/2021</div></div>
+    </div>
+  </div>
+  <div class="contact-card rev">
+    <h3>Solicite uma Proposta</h3>
+    <p>Preencha o formulário e nossa equipe de negócios entrará em contato para apresentar a melhor solução para o seu órgão.</p>
+    <div class="fg2"><div class="fg"><input type="text" placeholder="Nome completo"></div><div class="fg"><input type="text" placeholder="Órgão / Instituição"></div></div>
+    <div class="fg2"><div class="fg"><input type="email" placeholder="E-mail institucional"></div><div class="fg"><input type="tel" placeholder="Telefone / WhatsApp"></div></div>
+    <div class="fg"><select><option value="" disabled selected>Vertical de interesse</option><option>Administração</option><option>Saúde</option><option>Educação</option><option>Segurança Pública e Trânsito</option><option>Redes e Serviços de TI</option><option>Governo Digital</option><option>Vários / Não sei ainda</option></select></div>
+    <div class="fg"><textarea placeholder="Descreva brevemente sua necessidade..."></textarea></div>
+    <button class="btn-sub">Enviar Solicitação →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div><div class="fl"><b>ETi</b>Pi</div><div class="ft-tag">Empresa de Tecnologia da Informação do Estado do Piauí</div></div>
+    <div style="text-align:right;color:rgba(255,255,255,.4);font-size:.78rem;line-height:1.9"><div>Av. Pedro Freitas, 1900 — Teresina/PI</div><div>DIN@ETIPI.PI.GOV.BR</div><div>WWW.ETIPI.PI.GOV.BR</div></div>
+  </div>
+  <div class="fb"><span>© 2025 ETIPI — Todos os direitos reservados.</span><span>Facilitar Vidas e Transformar o Futuro</span></div>
+  <div class="fc"></div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-body">
+      <div id="modalBadge"></div>
+      <div class="modal-vert" id="modalVert"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-intro" id="modalIntro"></div>
+      <div class="modal-pv-title">Proposta de Valor</div>
+      <div class="modal-pv" id="modalPv"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => { if(e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 70); });
+}, {threshold: 0.1});
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+const ct = document.getElementById('ct');
+ct.innerHTML += ct.innerHTML;
+
+function filt(cat, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pi').forEach(p => {
+    const match = cat === 'todos' || p.dataset.c === cat || (cat === 'super' && p.dataset.type === 'super');
+    p.classList.toggle('show', match);
+  });
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.boxShadow = window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,.3)' : 'none';
+});
+
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+document.querySelectorAll('.pi').forEach(card => {
+  const m = (card.getAttribute('onclick') || '').match(/openProduct\('(.+?)'\)/);
+  if (m) {
+    card.removeAttribute('onclick');
+    card.addEventListener('click', () => openProduct(m[1]));
+  }
+});
+
+function openProduct(key) {
+  const p = PRODUCTS[key];
+  if (!p) return;
+  document.getElementById('modalImg').src = p.img;
+  document.getElementById('modalImg').alt = p.name;
+  document.getElementById('modalBadge').innerHTML = p.badge;
+  document.getElementById('modalVert').textContent = p.vertical;
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalIntro').textContent = p.intro;
+  document.getElementById('modalPv').innerHTML = p.pv;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay')) return;
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+const PRODUCTS = {
+  telessaude: {
+    name: 'Telessaúde Digital',
+    badge: '<div class="pc-badge b-super" style="margin-bottom:.75rem">⭐ Super Produto</div>',
+    vertical: 'Vertical de Saúde',
+    img: 'images/Telessáude.png',
+    intro: 'A Telessaúde Digital é a plataforma estadual de telemedicina da ETIPI, desenvolvida para ampliar o acesso a serviços de saúde em todo o território, especialmente em municípios de difícil acesso. Com teleconsultas disponíveis 24 horas por dia, telediagnósticos especializados e inteligência artificial para triagem e priorização de casos, a solução reduz filas presenciais, democratiza o atendimento especializado e integra toda a cadeia de cuidado em um ambiente digital seguro e auditável.',
+    pv: `<ul><li>✦ <strong>Teleconsultas 24h/7:</strong> Conecta pacientes a médicos especialistas a qualquer hora, eliminando deslocamentos e reduzindo filas de espera por consultas especializadas.</li><li>✦ <strong>Telediagnóstico:</strong> Laudos de ECG, radiologia e dermatoscopia interpretados remotamente por especialistas credenciados, com retorno em até 24 horas.</li><li>✦ <strong>IA para triagem e priorização:</strong> Algoritmo analisa sintomas e histórico clínico para encaminhar casos urgentes automaticamente ao especialista mais adequado.</li><li>✦ <strong>Integração Gov.br e e-SUS:</strong> Autenticação unificada e sincronização com o Prontuário Eletrônico nacional, garantindo continuidade do cuidado.</li><li>✦ <strong>Cases comprovados:</strong> Implantado no Amazonas (Saúde AM Digital) e no Pará (IASEP), com atendimento especializado em regiões remotas de difícil acesso.</li><li>✦ <strong>Conformidade LGPD:</strong> Dados de pacientes criptografados, anonimizados e auditáveis, com consentimento digital integrado ao fluxo de atendimento.</li></ul>`
+  },
+  siape: {
+    name: 'SIAPE — Sistema Integrado de Administração de Pessoas',
+    badge: '<div class="pc-badge b-super" style="margin-bottom:.75rem">⭐ Super Produto</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/siape.png',
+    intro: 'O SIAPE é a plataforma integrada de gestão de recursos humanos da ETIPI, desenvolvida especialmente para o setor público estadual. Abrange todo o ciclo de vida funcional do servidor — do ingresso à aposentadoria — com módulos para cadastro funcional, folha de pagamento, controle de frequência e ponto eletrônico, gestão de carreiras, benefícios e concessões. Seu motor de regras totalmente parametrizável adapta-se a qualquer plano de carreira ou legislação estadual sem necessidade de desenvolvimento adicional.',
+    pv: `<ul><li>✦ <strong>Motor de regras parametrizável:</strong> Cada regra de progressão, gratificação ou desconto é configurável sem código, adaptando-se a qualquer legislação estadual.</li><li>✦ <strong>Folha de pagamento automatizada:</strong> Cálculo mensal com validações automáticas, geração de contracheques digitais e integração com sistemas de contabilidade pública.</li><li>✦ <strong>Ponto eletrônico integrado:</strong> Controle de frequência via biometria, app mobile e webclocking, com apuração automática de horas e geração de relatórios gerenciais.</li><li>✦ <strong>Gestão de carreiras e benefícios:</strong> Progressões, promoções e concessão de benefícios com workflow de aprovação e histórico funcional completo.</li><li>✦ <strong>Painel gerencial em tempo real:</strong> Dashboards com indicadores de força de trabalho, lotação, afastamentos e custos por secretaria ou órgão.</li><li>✦ <strong>Conformidade LGPD:</strong> Dados funcionais criptografados com controle de acesso por perfil e auditoria completa de todas as operações.</li></ul>`
+  },
+  govpi: {
+    name: 'Gov.Pi',
+    badge: '<div class="pc-badge b-super" style="margin-bottom:.75rem">⭐ Super Produto</div>',
+    vertical: 'Governo Digital',
+    img: 'images/Gov.Pi.png',
+    intro: 'O Gov.Pi é o portal de governo digital do Estado do Piauí, concentrando mais de 300 serviços públicos em uma única plataforma integrada ao Gov.br. Com login único para cidadãos, servidores e empresas, o portal elimina a necessidade de deslocamentos presenciais e filas em repartições públicas, oferecendo acesso digital a certidões, agendamentos, protocolos e outros serviços com autenticação segura, soberania de dados e plena conformidade com a Lei de Governo Digital.',
+    pv: `<ul><li>✦ <strong>300+ serviços integrados:</strong> Certidões, agendamentos, consultas, protocolos e pagamentos reunidos em um único ambiente digital acessível 24 horas.</li><li>✦ <strong>Login único via Gov.br:</strong> Autenticação federada eliminando múltiplos cadastros, com níveis de segurança Bronze, Prata e Ouro conforme a sensibilidade do serviço.</li><li>✦ <strong>Soberania digital:</strong> Dados hospedados em infraestrutura do Estado do Piauí, sem dependência de plataformas privadas estrangeiras.</li><li>✦ <strong>Acessibilidade:</strong> Interface responsiva em conformidade com o Modelo de Acessibilidade em Governo Eletrônico (e-MAG), alcançando cidadãos de todos os perfis.</li><li>✦ <strong>Integração interoperável:</strong> APIs abertas conectam secretarias, autarquias e prefeituras parceiras, ampliando o catálogo de serviços continuamente.</li><li>✦ <strong>Analítica de uso:</strong> Painel de monitoramento em tempo real para gestores com indicadores de acesso, satisfação e gargalos no uso dos serviços.</li></ul>`
+  },
+  cellguard: {
+    name: 'Cell Guard',
+    badge: '<div class="pc-badge b-super" style="margin-bottom:.75rem">⭐ Super Produto</div>',
+    vertical: 'Segurança Pública e Trânsito',
+    img: 'images/Cell Guard.png',
+    intro: 'O Cell Guard é a plataforma de segurança pública com inteligência artificial desenvolvida para o rastreamento e recuperação de dispositivos móveis roubados ou furtados. Integrando forças policiais, operadoras de telefonia e a base nacional de IMEI bloqueados, a solução cria um ecossistema de combate ao crime cibernético e físico relacionado a celulares, reduzindo significativamente o mercado de receptação e devolvendo dispositivos a seus proprietários com processos ágeis e rastreáveis.',
+    pv: `<ul><li>✦ <strong>Rastreamento por IA:</strong> Algoritmos analisam sinais de rede, localização e padrões de uso para detectar dispositivos roubados em tempo real.</li><li>✦ <strong>Integração com operadoras:</strong> Bloqueio imediato do IMEI em todas as redes nacionais após registro do furto, inutilizando o dispositivo para uso não autorizado.</li><li>✦ <strong>Plataforma policial integrada:</strong> Interface dedicada para delegacias com acesso a histórico de ocorrências, localização e procedimentos de recuperação.</li><li>✦ <strong>Registro pelo WhatsApp:</strong> Cidadão registra furto ou roubo diretamente pelo aplicativo de mensagens, com emissão automática de protocolo e B.O. digital.</li><li>✦ <strong>Banco de dados nacional:</strong> Integração com a base ANATEL/ANPD de aparelhos bloqueados, ampliando o alcance da solução além das fronteiras estaduais.</li><li>✦ <strong>Redução da receptação:</strong> Dados comprovam queda expressiva no mercado informal de celulares roubados nas regiões onde a solução é implantada.</li></ul>`
+  },
+  bofacil: {
+    name: 'B.O. Fácil',
+    badge: '<div class="pc-badge b-super" style="margin-bottom:.75rem">⭐ Super Produto</div>',
+    vertical: 'Segurança Pública e Trânsito',
+    img: 'images/B.O Fácil.png',
+    intro: 'O B.O. Fácil moderniza completamente o registro de Boletins de Ocorrência, substituindo sistemas legados por uma arquitetura Data Lakehouse que unifica dados de toda a rede policial do estado. Com registro disponível pelo WhatsApp, portal web e aplicativo mobile, o cidadão pode registrar ocorrências sem precisar comparecer presencialmente a uma delegacia, enquanto gestores de segurança pública acessam painéis analíticos de criminalidade em tempo real para tomada de decisão estratégica.',
+    pv: `<ul><li>✦ <strong>B.O. pelo WhatsApp:</strong> Cidadão registra ocorrências diretamente pelo aplicativo de mensagens com assistente conversacional guiado e emissão imediata de número de protocolo.</li><li>✦ <strong>Arquitetura Data Lakehouse:</strong> Unifica todos os registros em um repositório centralizado com qualidade de dados garantida, eliminando redundâncias entre delegacias.</li><li>✦ <strong>Integração nacional:</strong> Conectado à base do SINESP e sistemas federais, permitindo consultas e cruzamentos de ocorrências entre estados.</li><li>✦ <strong>Painel de inteligência:</strong> Mapas de calor, séries temporais e alertas automáticos de padrões criminais auxiliam comandos policiais no planejamento de operações.</li><li>✦ <strong>Gestão do ciclo completo:</strong> Do registro ao encerramento do inquérito, com workflow digital entre delegado, escrivão e analistas, sem papel.</li><li>✦ <strong>Conformidade jurídica:</strong> Documentos com validade legal, assinatura digital e rastreabilidade de alterações conforme exigências do Código de Processo Penal.</li></ul>`
+  },
+  primeirainfancia: {
+    name: 'Plataforma da Primeira Infância',
+    badge: '<div class="pc-badge b-super" style="margin-bottom:.75rem">⭐ Super Produto</div>',
+    vertical: 'Vertical de Educação',
+    img: 'images/Plataforma da Primeira Infância.png',
+    intro: 'A Plataforma da Primeira Infância é uma solução integrada para a gestão do desenvolvimento de crianças de 0 a 6 anos, reunindo em um único ambiente digital dados de saúde, educação, assistência social e parentalidade. Alinhada ao framework de Desenvolvimento na Primeira Infância (DPI) da OMS e UNICEF, a plataforma permite que equipes multidisciplinares acompanhem cada criança de forma longitudinal, identificando vulnerabilidades e coordenando intervenções com maior eficácia.',
+    pv: `<ul><li>✦ <strong>Prontuário longitudinal 0–6 anos:</strong> Registro unificado de dados de saúde, educação e assistência social, acessível por todos os profissionais que atendem a criança.</li><li>✦ <strong>Alertas automáticos de desenvolvimento:</strong> Sistema notifica equipes quando marcos do desenvolvimento não são atingidos no prazo esperado, acionando protocolos de intervenção.</li><li>✦ <strong>Módulo de parentalidade:</strong> App para pais e cuidadores com dicas de estimulação, agenda de consultas e atividades alinhadas à faixa etária da criança.</li><li>✦ <strong>Integração intersetorial:</strong> Dados de CRAS, UBS, CMEI e escola reunidos em um único perfil, eliminando retrabalho e garantindo continuidade do cuidado.</li><li>✦ <strong>Painel de gestão municipal:</strong> Indicadores em tempo real sobre cobertura de vacinação, matrícula em creches e vulnerabilidade familiar por território.</li><li>✦ <strong>Alinhamento OMS/UNICEF:</strong> Metodologia baseada no framework Nurturing Care, reconhecido internacionalmente como padrão-ouro para a primeira infância.</li></ul>`
+  },
+  cin: {
+    name: 'Serviço de Identificação CIN',
+    badge: '<div class="pc-badge b-super" style="margin-bottom:.75rem">⭐ Super Produto</div>',
+    vertical: 'Segurança Pública e Trânsito',
+    img: 'images/Serviço de Identificação e Carteiras.png',
+    intro: 'O Serviço de Identificação CIN é a plataforma completa para emissão e gestão da Carteira de Identidade Nacional, o novo documento de identidade do Brasil instituído pela Lei nº 7.116/1983 e atualizado pela Portaria SESP nº 460/2022. Com tecnologia de biometria facial, OCR para leitura de documentos, prova de vida e assinatura eletrônica avançada, a solução da ETIPI garante eficiência na emissão, segurança contra fraudes e total conformidade com os padrões do SERPRO e do Ministério da Gestão.',
+    pv: `<ul><li>✦ <strong>Biometria facial com prova de vida:</strong> Captura facial com detecção de vivacidade (liveness detection) elimina fraudes por fotos ou vídeos durante o processo de identificação.</li><li>✦ <strong>OCR avançado de documentos:</strong> Leitura automática de certidões de nascimento e documentos anteriores, reduzindo o tempo de atendimento e erros de digitação.</li><li>✦ <strong>Assinatura eletrônica avançada:</strong> Coleta digital de assinatura no padrão ICP-Brasil, conferindo validade jurídica plena ao documento emitido.</li><li>✦ <strong>Integração com base nacional:</strong> Consulta em tempo real à base do IIRGD e ao Cadastro de Pessoas Físicas da Receita Federal para validação de dados.</li><li>✦ <strong>Gestão de filas e agendamentos:</strong> Portal e app para agendamento prévio, reduzindo tempos de espera e otimizando a capacidade dos postos de atendimento.</li><li>✦ <strong>Emissão descentralizada:</strong> Arquitetura que permite implantação em cartórios, postos do DETRAN, prefeituras e unidades móveis itinerantes.</li></ul>`
+  },
+  govspace: {
+    name: 'GOV.SPACE',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/GOVSPACE.png',
+    intro: 'O GOV.SPACE é a suíte de produtividade e colaboração digital soberana desenvolvida para o setor público, oferecendo GovMail (e-mail corporativo), GovDrive (armazenamento e gestão de arquivos) e Gov.Meet (videoconferência). Projetada para substituir plataformas privadas estrangeiras como Google Workspace e Microsoft 365, a solução garante que os dados governamentais permaneçam em infraestrutura nacional, com criptografia de ponta a ponta e total aderência à LGPD e às diretrizes de soberania digital do Governo Federal.',
+    pv: `<ul><li>✦ <strong>GovMail:</strong> E-mail corporativo com domínio gov.br, criptografia S/MIME, assinatura digital integrada e antispam governamental de alta precisão.</li><li>✦ <strong>GovDrive:</strong> Armazenamento em nuvem governamental com versionamento de documentos, controle de acesso granular e auditoria de acessos e downloads.</li><li>✦ <strong>Gov.Meet:</strong> Videoconferência com gravação segura, transcrição automática, salas persistentes e capacidade para até 500 participantes simultâneos.</li><li>✦ <strong>Soberania digital garantida:</strong> Toda a infraestrutura hospedada em data centers nacionais, sem transferência de dados para jurisdições estrangeiras.</li><li>✦ <strong>Integração com SEI e Gov.br:</strong> Documentos do GovDrive assinados digitalmente com envio direto ao SEI; autenticação unificada via Gov.br para todos os módulos.</li><li>✦ <strong>Migração assistida:</strong> Serviço de migração de e-mails, arquivos e contatos de plataformas legadas com zero de perda de dados e continuidade operacional.</li></ul>`
+  },
+  papiro: {
+    name: 'Papiro — IA para Documentos',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/Papiro.png',
+    intro: 'O Papiro é a plataforma de gestão documental inteligente da ETIPI, que aplica inteligência artificial e OCR avançado para transformar documentos físicos e digitais em ativos estruturados e pesquisáveis. Além da digitalização e indexação automática, o Papiro classifica documentos por tipologia, extrai metadados relevantes e automatiza a publicação de atos no Diário Oficial, eliminando gargalos burocráticos e reduzindo drasticamente o tempo de tramitação de processos administrativos.',
+    pv: `<ul><li>✦ <strong>OCR com IA:</strong> Reconhecimento de caracteres de altíssima precisão em documentos manuscritos, datilografados e impressos, inclusive de qualidade degradada.</li><li>✦ <strong>Classificação automática:</strong> IA classifica documentos por tipologia (ofícios, decretos, contratos, certidões) e aplica tabelas de temporalidade de forma automática.</li><li>✦ <strong>Extração de metadados:</strong> Identificação automática de datas, valores, partes envolvidas, números de processo e outros dados estruturados para indexação semântica.</li><li>✦ <strong>Publicação automática no Diário Oficial:</strong> Integração direta com o sistema do Diário Oficial Eletrônico, automatizando o fluxo de publicação de atos normativos.</li><li>✦ <strong>Busca semântica:</strong> Motor de busca que compreende o contexto e a intenção da consulta, encontrando documentos mesmo com termos parciais ou sinônimos.</li><li>✦ <strong>Integração SEI e GovDrive:</strong> Documentos processados alimentam automaticamente o SEI e o GovDrive, centralizando o acervo documental do órgão.</li></ul>`
+  },
+  emit: {
+    name: 'EMIT — Sistema de Inteligência Tributária Municipal',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/EMIT.png',
+    intro: 'O EMIT é o ecossistema tributário municipal 100% web desenvolvido pela ETIPI para modernizar a gestão fiscal de prefeituras. Contempla todos os tributos municipais — IPTU, ISS, ITBI, taxas e contribuições — com motor de cálculo parametrizável, módulo de arrecadação, gestão de dívida ativa, parcelamentos e atendimento digital ao contribuinte. Com interface intuitiva e integração à nota fiscal eletrônica, o EMIT aumenta a eficiência arrecadatória e reduz a evasão fiscal sem burocracia.',
+    pv: `<ul><li>✦ <strong>Motor de cálculo parametrizável:</strong> Regras de alíquotas, isenções e descontos configuradas por auditores fiscais sem necessidade de programação, adaptando-se à legislação de cada município.</li><li>✦ <strong>Nota Fiscal Eletrônica de Serviços (NFS-e):</strong> Emissão e recepção de NFS-e padrão ABRASF integrada ao sistema de ISS, com cruzamento automático de dados para fiscalização.</li><li>✦ <strong>Gestão de dívida ativa:</strong> Controle da inscrição, atualização monetária, parcelamentos, remissões e ajuizamentos com geração automática de certidões.</li><li>✦ <strong>Atendimento digital ao contribuinte:</strong> Portal e app para emissão de guias, consulta de débitos, solicitação de certidões e acompanhamento de processos sem ir ao balcão.</li><li>✦ <strong>Inteligência fiscal:</strong> Cruzamento de dados com SPED, declarações e cadastros para identificação de sonegação e autuação automatizada.</li><li>✦ <strong>Integração SIAFEM/SIAFIC:</strong> Repasse automático de informações ao sistema contábil estadual, garantindo conformidade com os normativos do TCE.</li></ul>`
+  },
+  sincin: {
+    name: 'SINCIN — Sistema de Controle Interno',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/SINCIN.png',
+    intro: 'O SINCIN é a plataforma de controle interno em nuvem desenvolvida para a fiscalização de contratos públicos, análise de empenhos e prestação de contas. Projetado para atender controladoras estaduais, municipais e órgãos fiscalizadores, o sistema oferece workflows digitais de fiscalização, análise automática de despesas, gestão de alertas e integração com portais de transparência, garantindo conformidade com a Lei nº 14.133/2021 e os normativos dos Tribunais de Contas.',
+    pv: `<ul><li>✦ <strong>Fiscalização digital de contratos:</strong> Workflow eletrônico para designação de fiscais, registro de medições, atestados de recebimento e penalidades, tudo com validade jurídica.</li><li>✦ <strong>Análise automática de empenhos:</strong> Motor de regras verifica conformidade orçamentária, limites de dispensa, vínculos com dotações e alertas de irregularidades.</li><li>✦ <strong>Prestação de contas digital:</strong> Módulo específico para entidades que recebem repasses, com envio de documentos, análise de relatórios e emissão de pareceres.</li><li>✦ <strong>Integração com portais de transparência:</strong> Exportação automática de dados contratuais e financeiros para o Portal da Transparência, cumprindo exigências da LAI.</li><li>✦ <strong>Painel de riscos:</strong> Dashboard que consolida indicadores de conformidade, contratos vencidos, irregularidades pendentes e pendências por unidade gestora.</li><li>✦ <strong>Conformidade Lei 14.133/2021:</strong> Estrutura totalmente alinhada à Nova Lei de Licitações, com módulos específicos para as novas modalidades e exigências.</li></ul>`
+  },
+  educacorp: {
+    name: 'EducaCorp',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Educação',
+    img: 'images/EducaCorp.png',
+    intro: 'O EducaCorp é a plataforma governamental de educação corporativa desenvolvida pela ETIPI para capacitar servidores públicos de forma contínua, escalável e rastreável. Com Ambiente Virtual de Aprendizagem (AVA) completo, trilhas de aprendizado personalizadas, emissão de certificados digitais com validade jurídica e integração ao Gov.br, o EducaCorp transforma o desenvolvimento de competências dos servidores em um ativo estratégico para a modernização da gestão pública.',
+    pv: `<ul><li>✦ <strong>AVA completo:</strong> Cursos em vídeo, textos interativos, quizzes, fóruns de discussão e salas de aula virtuais com suporte a múltiplos formatos de conteúdo (SCORM, xAPI).</li><li>✦ <strong>Trilhas personalizadas por cargo:</strong> Itinerários formativos definidos por competência, cargo ou secretaria, com recomendação de conteúdos baseada no perfil do servidor.</li><li>✦ <strong>Certificados digitais com validade jurídica:</strong> Emissão automática com assinatura digital ICP-Brasil, código de verificação e registro auditável no histórico do servidor.</li><li>✦ <strong>Integração Gov.br e SIAPE:</strong> Login único via Gov.br e sincronização automática com o histórico funcional do servidor no SIAPE, sem necessidade de novo cadastro.</li><li>✦ <strong>Gamificação e engajamento:</strong> Sistema de pontos, badges, rankings e desafios temáticos que elevam o engajamento dos servidores com os programas de capacitação.</li><li>✦ <strong>Analytics de aprendizado:</strong> Painel gerencial com taxas de conclusão, notas, tempo de estudo e lacunas de competências por órgão ou cargo.</li></ul>`
+  },
+  ensinus: {
+    name: 'Ensinus',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Educação',
+    img: 'images/Ensinus.png',
+    intro: 'O Ensinus é a plataforma de gestão escolar e educação pública desenvolvida para conectar gestores municipais, diretores, professores, alunos e famílias em um único ambiente digital. Com módulos de matrícula, frequência, notas, comunicados, agenda escolar e acompanhamento pedagógico, o Ensinus moderniza a administração das redes públicas de ensino, com notificações automáticas por app e dashboards em tempo real que permitem intervenções rápidas onde os alunos mais precisam.',
+    pv: `<ul><li>✦ <strong>Gestão completa da rede escolar:</strong> Matrícula digital, controle de frequência, lançamento de notas, transferências e histórico escolar em um único sistema integrado.</li><li>✦ <strong>App para famílias:</strong> Pais e responsáveis acompanham frequência, notas, comunicados e agenda da escola em tempo real pelo smartphone, com notificações push.</li><li>✦ <strong>Painel pedagógico:</strong> Diretores e secretarias municipais visualizam indicadores de desempenho, evasão, reprovação e metas do IDEB por escola e por turma.</li><li>✦ <strong>Diário eletrônico:</strong> Professor registra frequência, conteúdo e avaliações pelo celular ou computador, eliminando o diário de papel e reduzindo o trabalho burocrático.</li><li>✦ <strong>Case SEMED Timon-MA:</strong> Implantado com sucesso na Secretaria Municipal de Educação de Timon, com resultados expressivos em redução de evasão escolar.</li><li>✦ <strong>Notificações automáticas:</strong> Sistema alerta automaticamente famílias sobre faltas, notas baixas e comunicados importantes, melhorando o engajamento escolar.</li></ul>`
+  },
+  soc: {
+    name: 'SOC — Security Operations Center',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/SOC.png',
+    intro: 'O SOC da ETIPI é o centro especializado em segurança cibernética para órgãos públicos, operando 24 horas por dia, 7 dias por semana, com equipe certificada em detecção, análise e resposta a incidentes. Com tecnologias de SIEM (Security Information and Event Management), EDR (Endpoint Detection and Response) e automação de resposta (SOAR), o serviço protege a infraestrutura digital governamental contra ameaças avançadas, ransomware e ataques direcionados, garantindo conformidade com a LGPD e o Decreto de Segurança da Informação.',
+    pv: `<ul><li>✦ <strong>Monitoramento 24x7:</strong> Analistas especializados monitoram continuamente todos os ativos de TI do órgão, com tempo médio de detecção (MTTD) inferior a 15 minutos.</li><li>✦ <strong>SIEM avançado:</strong> Correlação de eventos de segurança em tempo real com regras personalizadas para o ambiente governamental e alertas de prioridade automática.</li><li>✦ <strong>EDR/XDR:</strong> Proteção de endpoints com detecção comportamental, isolamento automático de máquinas comprometidas e resposta a incidentes sem intervenção humana.</li><li>✦ <strong>Threat Intelligence:</strong> Feeds de inteligência de ameaças governamentais integrados ao CTIR.Gov, antecipando ataques antes que afetem os sistemas.</li><li>✦ <strong>Conformidade LGPD:</strong> Relatórios mensais de conformidade, registros de incidentes para notificação à ANPD e suporte a auditorias de proteção de dados.</li><li>✦ <strong>Resposta a incidentes:</strong> Equipe CSIRT dedicada com playbooks específicos para órgãos públicos, garantindo contenção e recuperação rápida em caso de ataque.</li></ul>`
+  },
+  nuvem: {
+    name: 'Computação em Nuvem',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Computação em Nuvem.png',
+    intro: 'A solução de Computação em Nuvem da ETIPI oferece modelo híbrido que combina infraestrutura on-premise do Data Center estadual Tier III com os principais provedores globais — AWS, Google Cloud e Oracle Cloud. Pensada para as demandas específicas do setor público, a solução garante escalabilidade automática para absorver picos de uso em períodos críticos como declarações de IR, matrículas escolares ou pagamento de servidores, sem desperdício de recursos nos demais períodos.',
+    pv: `<ul><li>✦ <strong>Modelo híbrido governamental:</strong> Dados sensíveis permanecem no data center local enquanto cargas de trabalho variáveis escalam automaticamente na nuvem pública, otimizando custo e segurança.</li><li>✦ <strong>Multi-cloud gerenciado:</strong> ETIPI gerencia os ambientes AWS, Google Cloud e Oracle Cloud de forma unificada, sem que o órgão precise de equipe especializada em cada plataforma.</li><li>✦ <strong>Escalabilidade sob demanda:</strong> Capacidade para absorver picos de até 10x o uso normal em horas, garantindo disponibilidade em períodos críticos sem superprovisionamento.</li><li>✦ <strong>FinOps público:</strong> Relatórios mensais de consumo e custo com recomendações de otimização, garantindo uso eficiente do recurso público sem desperdício.</li><li>✦ <strong>Conformidade e soberania:</strong> Políticas de residência de dados garantem que informações sensíveis sejam processadas em território nacional, conforme exigências legais.</li><li>✦ <strong>Disaster Recovery:</strong> Planos de DR com RTO e RPO definidos em SLA, com replicação automática entre ambientes e testes periódicos documentados.</li></ul>`
+  },
+  prontuario: {
+    name: 'Prontuário Eletrônico',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Saúde',
+    img: 'images/Prontuario.png',
+    intro: 'O Prontuário Eletrônico da ETIPI é a plataforma que unifica o histórico de saúde do paciente em todos os pontos de atenção da rede pública, integrando-se ao e-SUS Atenção Primária e ao Conecte SUS do Ministério da Saúde. Com módulos de agendamento, gestão de filas, prescrição eletrônica e controle de estoque de medicamentos, o sistema oferece aos profissionais de saúde uma visão completa do paciente e às secretarias de saúde o monitoramento em tempo real dos indicadores assistenciais.',
+    pv: `<ul><li>✦ <strong>Visão unificada do paciente:</strong> Histórico clínico completo acessível em qualquer ponto da rede — UBS, hospital, CAPS ou especialidade — em tempo real.</li><li>✦ <strong>Integração e-SUS e Conecte SUS:</strong> Sincronização bidirecional com as bases federais, garantindo continuidade do cuidado e alimentação dos indicadores nacionais.</li><li>✦ <strong>Agendamento e gestão de filas:</strong> Sistema de marcação de consultas, exames e procedimentos com regulação inteligente de vagas e notificações automáticas ao paciente.</li><li>✦ <strong>Prescrição eletrônica:</strong> Receituário digital com verificação de interações medicamentosas, dose máxima e alergias, reduzindo erros de medicação.</li><li>✦ <strong>Controle de estoque:</strong> Módulo de farmácia integrado ao prontuário para dispensação, controle de validade e alertas de reposição automáticos.</li><li>✦ <strong>Conformidade LGPD e CFM:</strong> Dados criptografados, controle de acesso por profissional e por estabelecimento, em conformidade com as Resoluções CFM nº 2.299/2021.</li></ul>`
+  },
+  pdtic: {
+    name: 'Consultoria para PDTIC',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/pdtic.png',
+    intro: 'O serviço de Consultoria para PDTIC da ETIPI auxilia órgãos públicos na elaboração do Plano Diretor de Tecnologia da Informação e Comunicação, do Planejamento Estratégico de TI e do Plano Anual de Contratações de TI. Com especialistas experientes no setor público, a ETIPI conduz todo o ciclo de planejamento estratégico de TI em conformidade com as instruções normativas do TCU, MPDG e ENAP, garantindo que os investimentos em tecnologia estejam alinhados aos objetivos institucionais do órgão.',
+    pv: `<ul><li>✦ <strong>PDTIC completo:</strong> Diagnóstico situacional, mapeamento de processos críticos, definição de objetivos estratégicos de TI e plano de ação com cronograma e indicadores.</li><li>✦ <strong>Planejamento Estratégico de TI:</strong> Alinhamento da estratégia de TI ao Plano Estratégico Institucional (PEI), com mapeamento de gaps tecnológicos e roadmap de evolução.</li><li>✦ <strong>Plano Anual de Contratações:</strong> Estruturação do PAC de TI em conformidade com a IN SGD/ME nº 1/2019, com estimativas de custo e justificativas técnicas prontas para licitação.</li><li>✦ <strong>Conformidade TCU e CGU:</strong> Metodologia alinhada às melhores práticas de governança de TI do Tribunal de Contas da União e orientações da Controladoria Geral da União.</li><li>✦ <strong>Capacitação da equipe:</strong> Workshops e treinamentos para a equipe interna de TI, garantindo sustentabilidade do planejamento após a conclusão da consultoria.</li><li>✦ <strong>Revisão e atualização:</strong> Suporte para revisões anuais do PDTIC, mantendo o documento alinhado às mudanças tecnológicas e às novas prioridades institucionais.</li></ul>`
+  },
+  guardvisio: {
+    name: 'Guardvisio',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/Guardvisio.png',
+    intro: 'O Guardvisio é o sistema de gestão de patrimônio público desenvolvido para o controle de bens móveis e imóveis, manutenções preventivas e corretivas e movimentações patrimoniais. Com georreferenciamento integrado e aplicativo mobile que funciona offline, o Guardvisio permite que gestores de patrimônio realizem inventários físicos, registros de ocorrências e solicitações de manutenção diretamente no campo, sincronizando as informações com a base central quando a conectividade é restabelecida.',
+    pv: `<ul><li>✦ <strong>Inventário digital com QR Code/RFID:</strong> Etiquetagem eletrônica de bens com leitura via app mobile, tornando inventários anuais ágeis e precisos sem risco de erro humano.</li><li>✦ <strong>Georreferenciamento de ativos:</strong> Localização precisa de cada bem no mapa, facilitando auditorias e a identificação de desvios ou movimentações não autorizadas.</li><li>✦ <strong>App offline:</strong> Inventário e registro de ocorrências funcionam sem internet, sincronizando automaticamente quando o dispositivo é conectado à rede.</li><li>✦ <strong>Gestão de manutenções:</strong> Planos de manutenção preventiva com alertas automáticos, registro de manutenções corretivas e histórico completo por bem ou por instalação.</li><li>✦ <strong>Depreciação automática:</strong> Cálculo automático da depreciação de bens conforme a metodologia do TCU e as normas contábeis aplicáveis ao setor público (MCASP).</li><li>✦ <strong>Integração contábil:</strong> Exportação automática de dados patrimoniais para sistemas de contabilidade pública, garantindo consistência entre o balanço patrimonial e o inventário físico.</li></ul>`
+  },
+  credencia: {
+    name: 'CREDENCIA',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/CREDENCIA.png',
+    intro: 'O CREDENCIA é a plataforma digital para gestão de processos de credenciamento público, modalidade de contratação prevista no art. 79 da Nova Lei de Licitações (Lei nº 14.133/2021). Desenvolvida para secretarias de saúde, educação e assistência social, a solução digitaliza todo o ciclo do credenciamento — da publicação do edital ao cadastro dos credenciados, passando pela análise de documentação, habilitação técnica e renovação periódica — em conformidade com as normas vigentes.',
+    pv: `<ul><li>✦ <strong>Editais digitais:</strong> Publicação e gestão de editais de credenciamento com controle de versões, Q&A digital e publicação automática no Diário Oficial.</li><li>✦ <strong>Portal do credenciado:</strong> Interface para prestadores enviarem documentação, acompanharem o status de análise e receberem notificações, eliminando filas presenciais.</li><li>✦ <strong>Análise documental automatizada:</strong> Motor de validação verifica automaticamente validade de certidões, alvarás e habilitações, reduzindo o trabalho manual dos analistas.</li><li>✦ <strong>Gestão de credenciados ativos:</strong> Painel com status de cada prestador, alertas de documentos a vencer e controle de capacidade contratada por especialidade ou serviço.</li><li>✦ <strong>Conformidade Lei 14.133/2021:</strong> Estrutura jurídica alinhada ao art. 79 da Nova Lei de Licitações e às orientações do TCU sobre credenciamento no setor público.</li><li>✦ <strong>Integração com sistemas de pagamento:</strong> Envio automático de informações aos sistemas de contabilidade para processamento de faturas e controle orçamentário.</li></ul>`
+  },
+  sigrp: {
+    name: 'SIGRP — Sistema de Gestão de Repasses Públicos',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/SIGRP.png',
+    intro: 'O SIGRP é a plataforma de gestão de convênios, emendas parlamentares e transferências voluntárias que unifica o ciclo completo de repasses públicos entre o estado, municípios e entidades parceiras. Com rastreabilidade completa desde a celebração até a prestação de contas final, o sistema digitaliza o processo de análise técnica, execução financeira e fiscalização, reduzindo riscos de irregularidades e agilizando a aprovação de prestações de contas junto ao TCE e CGE.',
+    pv: `<ul><li>✦ <strong>Gestão do ciclo completo:</strong> Da proposta inicial ao encerramento — plano de trabalho, análise técnica, formalização, execução, monitoramento e prestação de contas em um único sistema.</li><li>✦ <strong>Rastreabilidade financeira:</strong> Cada movimentação de recurso é registrada com documento comprobatório, permitindo auditorias em tempo real sem necessidade de coleta manual de dados.</li><li>✦ <strong>Emendas parlamentares:</strong> Módulo específico para gestão de emendas impositivas e discricionárias, com controle de execução e relatórios para gabinetes parlamentares.</li><li>✦ <strong>Prestação de contas digital:</strong> Convenentes enviam documentos, notas fiscais e fotos de obras diretamente pelo sistema, com análise automatizada de conformidade.</li><li>✦ <strong>Alertas de prazo:</strong> Sistema notifica automaticamente gestores e convenentes sobre vencimentos de vigência, prazos de prestação de contas e pendências críticas.</li><li>✦ <strong>Integração TCE e CGE:</strong> Exportação padronizada de dados para os sistemas de controle externo e interno, facilitando auditorias e reduzindo retrabalho.</li></ul>`
+  },
+  extracash: {
+    name: 'Extracash',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Administração',
+    img: 'images/Extracash.png',
+    intro: 'O Extracash é o programa de benefícios e cashback financeiro desenvolvido pela ETIPI para servidores públicos estaduais. Por meio de parcerias com estabelecimentos comerciais, redes de farmácias, clínicas e serviços, os servidores acessam descontos exclusivos, cashback em compras e facilidades financeiras como antecipação de décimo terceiro e consignado simplificado, tudo gerenciado por um aplicativo integrado ao contracheque eletrônico do SIAPE.',
+    pv: `<ul><li>✦ <strong>Cashback em compras:</strong> Porcentagem de retorno automático em compras realizadas na rede de parceiros, depositada diretamente na conta do servidor ou em créditos para novos gastos.</li><li>✦ <strong>Rede de parceiros ampla:</strong> Parcerias com farmácias, supermercados, clínicas, academias, óticas e serviços educacionais, cobrindo as principais necessidades dos servidores.</li><li>✦ <strong>Antecipação salarial:</strong> Acesso a até 40% do salário líquido de forma antecipada, com desconto automático na folha de pagamento integrada ao SIAPE.</li><li>✦ <strong>Consignado digital:</strong> Contratação de empréstimo consignado 100% pelo app, com integração direta ao módulo de desconto em folha do SIAPE, sem burocracia.</li><li>✦ <strong>App completo:</strong> Carteira digital, extrato de cashback, mapa de parceiros próximos e gestão de benefícios em uma única interface intuitiva para iOS e Android.</li><li>✦ <strong>Gestão pelo RH:</strong> Painel administrativo para o setor de recursos humanos gerenciar o programa, aprovar descontos em folha e acompanhar adesão por órgão.</li></ul>`
+  },
+  pacienteintegrado: {
+    name: 'Paciente Integrado',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Saúde',
+    img: 'images/Paciente Integrado.png',
+    intro: 'O Paciente Integrado é a plataforma de gestão hospitalar da ETIPI, desenvolvida para hospitais públicos e institutos de saúde que necessitam de controle preciso sobre cirurgias, materiais e insumos de alto custo. Com mapa cirúrgico interativo, controle de OPMEs (Órteses, Próteses e Materiais Especiais), gestão de leitos e acompanhamento da jornada do paciente em tempo real, a solução otimiza o fluxo hospitalar, reduz desperdícios e melhora os indicadores de qualidade assistencial.',
+    pv: `<ul><li>✦ <strong>Mapa cirúrgico inteligente:</strong> Gestão de centro cirúrgico com agendamento de salas, controle de equipamentos, alertas de tempo de cirurgia e integração com anestesiologia.</li><li>✦ <strong>Controle de OPMEs:</strong> Rastreabilidade completa de próteses e materiais especiais do recebimento ao uso, com integração à ANVISA e alertas de recalls.</li><li>✦ <strong>Gestão de leitos em tempo real:</strong> Mapa interativo com status de cada leito — ocupado, disponível, em limpeza ou bloqueado — para agilizar internações e altas.</li><li>✦ <strong>Jornada do paciente:</strong> Acompanhamento do percurso do paciente desde a admissão até a alta, com alertas para cada etapa e registro de intercorrências.</li><li>✦ <strong>Auditoria de contas hospitalares:</strong> Módulo de conferência de cobranças ao SUS e planos de saúde, reduzindo glosas e maximizando o faturamento hospitalar.</li><li>✦ <strong>Integração com prontuário:</strong> Sincronização bidirecional com o Prontuário Eletrônico, garantindo que as informações hospitalares alimentem o histórico longitudinal do paciente.</li></ul>`
+  },
+  iaprontuarios: {
+    name: 'IA para Prontuários',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Saúde',
+    img: 'images/IA para Prontuários.png',
+    intro: 'A solução de IA para Prontuários da ETIPI aplica processamento de linguagem natural (NLP) e aprendizado de máquina para analisar, estruturar e extrair conhecimento clínico a partir de prontuários em formato livre — manuscritos, digitados ou ditados. Transformando dados não estruturados em informações clínicas padronizadas, a solução suporta a tomada de decisão médica, alimenta indicadores de saúde e reduz o trabalho administrativo dos profissionais, que passam mais tempo com os pacientes.',
+    pv: `<ul><li>✦ <strong>NLP médico especializado:</strong> Modelo de linguagem treinado em terminologia clínica brasileira (CID-10, TUSS, SIGTAP) para extração precisa de diagnósticos, medicamentos e procedimentos.</li><li>✦ <strong>Estruturação de dados livres:</strong> Transforma textos de prontuário não estruturado em campos padronizados — queixa principal, diagnóstico, prescrição, evolução — automaticamente.</li><li>✦ <strong>Apoio à decisão clínica:</strong> Sugere diagnósticos diferenciais, interações medicamentosas e protocolos assistenciais baseados no histórico do paciente e evidências científicas.</li><li>✦ <strong>Indicadores automáticos:</strong> Alimenta dashboards de saúde pública com dados extraídos dos prontuários, sem necessidade de preenchimento manual de fichas adicionais.</li><li>✦ <strong>Ditado médico com IA:</strong> Transcrição automática de gravações de voz para texto estruturado em prontuário, reduzindo o tempo de documentação clínica em até 60%.</li><li>✦ <strong>Conformidade ética e LGPD:</strong> Dados anonimizados para treinamento dos modelos, com consentimento informado e controles de privacidade alinhados ao CFM e à LGPD.</li></ul>`
+  },
+  gestorsaude: {
+    name: 'Gestor Saúde',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Saúde',
+    img: 'images/Gestor Saúde.png',
+    intro: 'O Gestor Saúde é a plataforma de gestão assistencial desenvolvida para institutos de assistência à saúde de servidores públicos, como o IASPI Saúde do Piauí. Integrando carteirinha digital, prontuário eletrônico, rede credenciada e auditoria preditiva por inteligência artificial, o sistema moderniza toda a operação do plano de saúde do servidor, reduzindo custos assistenciais, coibindo fraudes e melhorando a experiência do beneficiário.',
+    pv: `<ul><li>✦ <strong>Carteirinha digital:</strong> Substitui o plástico físico por carteirinha digital no app, com QR code dinâmico, validade em tempo real e bloqueio imediato em caso de exclusão.</li><li>✦ <strong>Auditoria preditiva por IA:</strong> Algoritmos analisam padrões de utilização para identificar anomalias, cobranças indevidas e possíveis fraudes antes do pagamento das contas.</li><li>✦ <strong>Rede credenciada integrada:</strong> Mapa de clínicas, hospitais e laboratórios credenciados com disponibilidade de horários e agendamento direto pelo app do beneficiário.</li><li>✦ <strong>Prontuário do beneficiário:</strong> Histórico clínico do servidor e seus dependentes, incluindo exames, internações e consultas realizadas na rede, acessível com segurança.</li><li>✦ <strong>Gestão de autorizações:</strong> Solicitação e aprovação de procedimentos eletivos, internações e OPME com workflow digital, reduzindo o tempo de resposta e o custo operacional.</li><li>✦ <strong>Painel gerencial do instituto:</strong> Indicadores de sinistralidade, utilização por especialidade, custo per capita e projeções atuariais em tempo real para a diretoria do instituto.</li></ul>`
+  },
+  spectrum: {
+    name: 'Spectrum',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Saúde',
+    img: 'images/Spectrum.png',
+    intro: 'O Spectrum é a plataforma especializada na gestão do cuidado de pessoas com Transtorno do Espectro Autista (TEA) e outras condições neurodivergentes. Desenvolvida com participação de especialistas em neuropsicologia, fonoaudiologia e terapia ocupacional, a solução integra prontuário clínico multidisciplinar, teleatendimento especializado, planos terapêuticos individualizados e acompanhamento familiar, tornando o cuidado mais acessível, coordenado e eficaz para essa população frequentemente sub-atendida.',
+    pv: `<ul><li>✦ <strong>Prontuário multidisciplinar:</strong> Registro unificado de consultas com neurologista, psicólogo, fonoaudiólogo, terapeuta ocupacional e psicopedagogo no mesmo perfil do paciente.</li><li>✦ <strong>Plano terapêutico individual (PTI):</strong> Elaboração e monitoramento colaborativo do PTI por toda a equipe, com metas evolutivas e registro de progresso por habilidade.</li><li>✦ <strong>Teleatendimento especializado:</strong> Sessões de terapia por videochamada com gravação opcional para análise retroativa e suporte às famílias em regiões sem serviços especializados locais.</li><li>✦ <strong>App para famílias:</strong> Módulo para pais e cuidadores com diário de comportamentos, registros de crise, lembretes de terapias e biblioteca de atividades de estimulação.</li><li>✦ <strong>Alertas de desenvolvimento:</strong> Sistema notifica a equipe clínica quando marcos de desenvolvimento não são atingidos, acionando revisão do plano terapêutico.</li><li>✦ <strong>Relatórios para laudos e INSS:</strong> Geração automatizada de relatórios clínicos e funcionais no formato exigido por escolas, seguradoras e INSS para concessão de benefícios.</li></ul>`
+  },
+  mediaotecnologica: {
+    name: 'Plataforma de Mediação Tecnológica',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Vertical de Educação',
+    img: 'images/Plataforma de Mediação Tecnológic.png',
+    intro: 'A Plataforma de Mediação Tecnológica é a solução de ensino a distância desenvolvida para redes públicas de educação que precisam de escalabilidade extrema. Com suporte a mais de 500 mil usuários simultâneos, transmissão ao vivo de aulas, repositório de videoaulas, IA adaptativa e comunicação direta entre professores e alunos, a plataforma supera as limitações das soluções de mercado que não foram construídas para a escala e diversidade das redes públicas de ensino brasileiras.',
+    pv: `<ul><li>✦ <strong>Escala governamental:</strong> Arquitetura projetada para suportar 500 mil acessos simultâneos sem degradação, ideal para períodos de prova, transmissões ao vivo e eventos educacionais.</li><li>✦ <strong>Transmissão ao vivo de aulas:</strong> Streaming de alta qualidade com baixa latência, chat interativo, enquetes e gravação automática para acesso posterior pelos alunos.</li><li>✦ <strong>IA adaptativa:</strong> Sistema analisa o desempenho do aluno e adapta o ritmo, a dificuldade e a sequência dos conteúdos para maximizar o aprendizado individual.</li><li>✦ <strong>Repositório de videoaulas:</strong> Biblioteca de conteúdo organizada por disciplina, série e currículo estadual, com busca semântica e recomendações personalizadas.</li><li>✦ <strong>Acessibilidade total:</strong> Legendas automáticas, audiodescrição, Libras e ajuste de velocidade em todos os conteúdos, atendendo às diretrizes de acessibilidade do MEC.</li><li>✦ <strong>Analytics pedagógico:</strong> Relatórios de engajamento, conclusão de atividades, notas e tempo de acesso por aluno, turma e escola para gestores e professores.</li></ul>`
+  },
+  integrafisp: {
+    name: 'IntegraFISP',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Segurança Pública e Trânsito',
+    img: 'images/IntegraFISP.png',
+    intro: 'O IntegraFISP é o sistema de integração e gestão dos Fundos Nacional e Estadual de Segurança Pública, desenvolvido para atender às exigências do FNSP/SENASP e das gestoras estaduais de fundos. Com módulos de controle físico e financeiro de bens adquiridos com recursos dos fundos, prestação de contas digital e rastreabilidade de equipamentos desde a aquisição até a destinação final, o IntegraFISP reduz irregularidades e agiliza a prestação de contas ao governo federal.',
+    pv: `<ul><li>✦ <strong>Gestão financeira dos fundos:</strong> Controle orçamentário e financeiro dos recursos do FUNDESPI e FNSP, com integração às dotações e empenhos do SIAFEM.</li><li>✦ <strong>Rastreabilidade de equipamentos:</strong> Controle do ciclo de vida de viaturas, armamentos, equipamentos de proteção e tecnologia adquiridos com recursos dos fundos.</li><li>✦ <strong>Prestação de contas SENASP:</strong> Geração automática dos relatórios exigidos pela Secretaria Nacional de Segurança Pública, nos formatos e prazos estabelecidos em portaria.</li><li>✦ <strong>Planos de aplicação digitais:</strong> Elaboração e gestão de planos de aplicação com workflow de aprovação, alterações e aditivos totalmente documentados e rastreáveis.</li><li>✦ <strong>Inventário patrimonial integrado:</strong> Conexão com o Guardvisio para controle físico de bens adquiridos, garantindo consistência entre o estoque contábil e o inventário físico.</li><li>✦ <strong>Alertas de prazo:</strong> Notificações automáticas sobre vencimentos de convênios, prazos de prestação de contas e bens com destinação pendente de regularização.</li></ul>`
+  },
+  colocation: {
+    name: 'Colocation',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Colocation.png',
+    intro: 'O serviço de Colocation da ETIPI disponibiliza espaço físico seguro, refrigerado e com energia redundante no Data Center governamental Tier III de Teresina para hospedagem de servidores e equipamentos de clientes. Certificado com redundância N+1 em energia e refrigeração, monitoramento 24x7 e controle de acesso físico por biometria, o data center oferece o nível de segurança e disponibilidade exigidos por sistemas críticos do setor público com custo operacional significativamente menor que manter uma sala de servidores própria.',
+    pv: `<ul><li>✦ <strong>Data Center Tier III:</strong> Infraestrutura com 99,982% de uptime garantido em SLA, energia redundante N+1 com dois circuitos independentes e gerador de emergência.</li><li>✦ <strong>Segurança física 24x7:</strong> Controle de acesso por biometria e cartão, CFTV com gravação contínua, vigilância presencial e registro auditável de cada entrada e saída.</li><li>✦ <strong>Refrigeração precisa:</strong> Sistema de ar condicionado de precisão com controle de temperatura e umidade em padrões internacionais, protegendo equipamentos de clientes.</li><li>✦ <strong>Conectividade múltipla:</strong> Ponto de presença de múltiplas operadoras e acesso à rede do Governo do Piauí, com possibilidade de uplinks dedicados de alta capacidade.</li><li>✦ <strong>Monitoramento remoto:</strong> Painel de acesso remoto para clientes acompanharem temperatura, consumo elétrico e status dos equipamentos hospedados em tempo real.</li><li>✦ <strong>Hands-on service:</strong> Equipe técnica disponível para intervenções físicas nos equipamentos dos clientes mediante chamado, eliminando a necessidade de deslocamento.</li></ul>`
+  },
+  conectinfra: {
+    name: 'Conectividade — Infraestrutura',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Conectividade: Infraestrutura.png',
+    intro: 'O serviço de Conectividade em Infraestrutura da ETIPI abrange o projeto, implantação e suporte de redes estruturadas para órgãos públicos, incluindo cabeamento estruturado categorias 6A e 8, intranets corporativas, soluções de rede óptica passiva (POL) e redes wireless corporativas de alto desempenho. Com equipe técnica certificada e metodologia de projeto alinhada às normas ABNT e TIA, a ETIPI entrega redes confiáveis e escaláveis que suportam o crescimento dos órgãos por anos.',
+    pv: `<ul><li>✦ <strong>Cabeamento estruturado certificado:</strong> Projeto e execução com cabeamento categoria 6A ou 8, certificado com testador aprovado pela TIA/EIA, garantindo desempenho para 10Gbps ou superior.</li><li>✦ <strong>Redes ópticas passivas (POL/GPON):</strong> Substituição do cabeamento convencional por fibra óptica até o desktop, reduzindo custo de cabeamento, pontos de falha e consumo de energia.</li><li>✦ <strong>Wireless corporativo:</strong> Redes Wi-Fi 6 e Wi-Fi 6E com controle centralizado, autenticação por certificado, segmentação por VLAN e cobertura planejada por simulação de RF.</li><li>✦ <strong>Infraestrutura de datacenter:</strong> Projeto e montagem de salas de servidores com racks, PDUs inteligentes, patch panels organizados e documentação as-built completa.</li><li>✦ <strong>Projeto executivo completo:</strong> Documentação técnica com planta baixa, diagramas lógicos, especificação de materiais e memorial descritivo para licitações.</li><li>✦ <strong>Suporte e manutenção:</strong> Contrato de manutenção preventiva e corretiva com SLA definido, monitoramento de desempenho e atendimento a chamados com priorização por criticidade.</li></ul>`
+  },
+  conectlinks: {
+    name: 'Conectividade — Links de Internet',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Conectividade: Links de Internet.png',
+    intro: 'O serviço de Conectividade em Links de Internet da ETIPI, operado por meio da subsidiária PiauíLink, provê acesso à internet de alta velocidade para órgãos públicos em todo o Piauí, utilizando fibra óptica, satélite de alta performance e tecnologia PAP (Ponto de Acesso Público) para alcançar municípios do interior e regiões onde o mercado privado não chega com qualidade adequada. Com SLAs rigorosos e monitoramento pelo NOC 24x7, o serviço garante a conectividade essencial para o funcionamento dos sistemas críticos do governo.',
+    pv: `<ul><li>✦ <strong>Fibra óptica dedicada:</strong> Links simétricos com garantia de 100% da banda contratada, SLA de disponibilidade de 99,5% e roteamento redundante por caminhos físicos distintos.</li><li>✦ <strong>Satélite de alta performance:</strong> Conectividade via satélite LEO para municípios sem infraestrutura de fibra, com latência baixa e banda adequada para sistemas de governo.</li><li>✦ <strong>PAP — Ponto de Acesso Público:</strong> Solução de conectividade para locais de difícil acesso, incluindo comunidades rurais, postos de saúde e escolas do campo.</li><li>✦ <strong>Cobertura estadual:</strong> Rede própria de fibra cobrindo os principais municípios do Piauí, com expansão contínua para novos pontos via subsidiária PiauíLink.</li><li>✦ <strong>Monitoramento NOC 24x7:</strong> Todos os links monitorados continuamente pelo Network Operations Center da ETIPI, com detecção automática de falhas e acionamento imediato.</li><li>✦ <strong>IP fixo e roteamento dedicado:</strong> Endereçamento IP fixo e gestão de roteamento BGP para órgãos com necessidade de múltiplos blocos ou peering dedicado.</li></ul>`
+  },
+  haas: {
+    name: 'HaaS — Hardware as a Service',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/HaaS.png',
+    intro: 'O HaaS (Hardware as a Service) da ETIPI permite que órgãos públicos utilizem estações de trabalho, notebooks, servidores, impressoras e demais equipamentos de TI por meio de assinatura mensal, convertendo investimentos de capital (CAPEX) em despesa operacional (OPEX). Com renovação tecnológica garantida, manutenção incluída no contrato e entrega e configuração realizadas pela ETIPI, o modelo HaaS elimina o ciclo vicioso de equipamentos obsoletos que compromete a produtividade dos servidores públicos.',
+    pv: `<ul><li>✦ <strong>CAPEX zero:</strong> Sem necessidade de licitação de equipamentos ou dotação orçamentária de capital — o custo mensal por equipamento é classificável como despesa corrente de serviços.</li><li>✦ <strong>Renovação tecnológica garantida:</strong> Equipamentos substituídos por modelos atualizados conforme o contrato, garantindo que os servidores públicos sempre trabalhem com hardware moderno e eficiente.</li><li>✦ <strong>Manutenção inclusa:</strong> Assistência técnica preventiva e corretiva sem custo adicional, com substituição de equipamento defeituoso em até 24 horas para itens críticos.</li><li>✦ <strong>Entrega e configuração:</strong> ETIPI realiza entrega, configuração de rede, instalação de software padrão do órgão e inventário dos ativos, sem custo de implantação.</li><li>✦ <strong>Gestão centralizada:</strong> Painel de inventário com status, localização e histórico de manutenção de cada equipamento, acessível pelo gestor de TI do órgão.</li><li>✦ <strong>Dispensa de licitação:</strong> Contratação via Art. 75, IX da Lei nº 14.133/2021, simplificando e agilizando o processo de aquisição para órgãos públicos estaduais.</li></ul>`
+  },
+  noc: {
+    name: 'NOC — Network Operation Center',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/NOC.png',
+    intro: 'O NOC (Network Operation Center) da ETIPI é o centro de operações de rede que monitora continuamente a infraestrutura de TI de órgãos públicos — servidores, roteadores, switches, links de internet, firewalls e sistemas críticos — 24 horas por dia, 7 dias por semana. Com dashboard em tempo real, alertas automáticos por múltiplos canais e equipe técnica pronta para responder, o NOC garante a máxima disponibilidade dos sistemas digitais governamentais e reduz o tempo de indisponibilidade (downtime) a mínimos históricos.',
+    pv: `<ul><li>✦ <strong>Monitoramento 24x7:</strong> Visibilidade em tempo real de toda a infraestrutura de TI do órgão, com alertas configurados por criticidade e escalonamento automático entre turnos.</li><li>✦ <strong>Dashboard unificado:</strong> Painel visual com status de todos os ativos monitorados, gráficos de desempenho histórico e indicadores de SLA disponíveis para o gestor de TI do órgão.</li><li>✦ <strong>Alertas multicanal:</strong> Notificações instantâneas por e-mail, SMS e app mobile quando qualquer ativo sai dos parâmetros normais de operação, minimizando o tempo de resposta.</li><li>✦ <strong>Gestão de incidentes:</strong> Sistema de tickets integrado ao monitoramento, com registro automático de incidentes, escalonamento por nível técnico e relatórios mensais de desempenho.</li><li>✦ <strong>Análise de capacidade:</strong> Relatórios mensais de tendência de uso que antecipam gargalos de largura de banda, storage e CPU antes que se tornem problemas críticos.</li><li>✦ <strong>SLA contratual:</strong> Compromisso de disponibilidade dos sistemas monitorados com penalidades contratuais claras, garantindo comprometimento real com a continuidade operacional.</li></ul>`
+  },
+  licencas: {
+    name: 'Licenças de Produtividade Digital',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Licenças de Produtividade Digital.png',
+    intro: 'O serviço de Licenças de Produtividade Digital da ETIPI disponibiliza, por meio de contratos consolidados, as principais ferramentas de produtividade para equipes governamentais: Microsoft 365, Google Workspace, ClickUp (gestão de projetos), Canva Pro (design), Kaspersky (antivírus) e outras. Com gestão centralizada de licenças, onboarding assistido e suporte técnico dedicado, a ETIPI simplifica a contratação, garante preços competitivos e elimina o risco de uso irregular de software nos órgãos.',
+    pv: `<ul><li>✦ <strong>Microsoft 365 Governamental:</strong> Teams, Outlook, Word, Excel, PowerPoint e OneDrive em planos específicos para o setor público, com conformidade LGPD e residência de dados no Brasil.</li><li>✦ <strong>Google Workspace for Government:</strong> Gmail, Drive, Meet, Docs e Sheets com painel de administração centralizado, DLP e auditoria de acessos para equipes governamentais.</li><li>✦ <strong>ClickUp para gestão de projetos:</strong> Ferramenta colaborativa de gestão de tarefas, projetos e sprints com dashboards personalizáveis para equipes de TI e gestão pública.</li><li>✦ <strong>Canva Pro para comunicação:</strong> Plataforma de design com templates institucionais pré-configurados com a identidade visual do órgão, facilitando a produção de materiais.</li><li>✦ <strong>Kaspersky Endpoint Security:</strong> Antivírus corporativo com console centralizado, relatórios de ameaças e integração com o SOC da ETIPI para resposta a incidentes.</li><li>✦ <strong>Gestão centralizada:</strong> Portal único de administração de todas as licenças, com controle de usuários, relatórios de uso e renovações automáticas sem risco de descontinuidade.</li></ul>`
+  },
+  fabricasoftware: {
+    name: 'Fábrica de Software',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Fabrica de Software.png',
+    intro: 'A Fábrica de Software da ETIPI oferece desenvolvimento de sistemas sob medida para órgãos públicos que necessitam de soluções digitais específicas que não estão no catálogo de produtos padrão. Com squads multidisciplinares de desenvolvedores, designers e analistas experientes no setor público, a ETIPI entrega sistemas com integração ao Gov.br, conformidade LGPD, arquitetura cloud-native e metodologia ágil, garantindo qualidade, segurança e manutenibilidade desde a concepção.',
+    pv: `<ul><li>✦ <strong>Metodologia ágil:</strong> Sprints de duas semanas com entregas incrementais, revisões com o cliente e backlog transparente, garantindo alinhamento contínuo às necessidades do órgão.</li><li>✦ <strong>Integração Gov.br nativa:</strong> Toda solução desenvolvida já inclui autenticação via Gov.br, eliminando a criação de novos cadastros e garantindo conformidade com os padrões federais.</li><li>✦ <strong>Cloud-native e escalável:</strong> Sistemas desenvolvidos em arquitetura de microsserviços, conteinerizados com Docker/Kubernetes e prontos para operar em nuvem governamental.</li><li>✦ <strong>Conformidade LGPD by design:</strong> Privacidade e proteção de dados incorporadas desde o design da solução, com DPIA documentado, criptografia e controles de acesso granulares.</li><li>✦ <strong>Código-fonte do órgão:</strong> Todo o código desenvolvido pertence ao órgão contratante, sem aprisionamento tecnológico, com documentação técnica e testes automatizados entregues.</li><li>✦ <strong>Suporte e evolução contínua:</strong> Contrato de manutenção corretiva e evolutiva pós-entrega, com canal dedicado de atendimento e SLA para resolução de bugs e novas funcionalidades.</li></ul>`
+  },
+  sei: {
+    name: 'Implantação e Suporte S.E.I',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/SEI.png',
+    intro: 'O serviço de Implantação e Suporte do SEI (Sistema Eletrônico de Informações) da ETIPI oferece consultoria especializada para órgãos públicos que desejam adotar ou modernizar o uso da plataforma do Ministério da Gestão. Com equipe certificada pelo Ministério e experiência em dezenas de implantações estaduais e municipais, a ETIPI conduz todo o processo — desde a instalação e configuração até a capacitação de usuários e a integração com outros sistemas do órgão.',
+    pv: `<ul><li>✦ <strong>Implantação técnica completa:</strong> Instalação em infraestrutura do órgão ou em nuvem, configuração de módulos, tipologias documentais, perfis de acesso e fluxos de trabalho customizados.</li><li>✦ <strong>Migração de processos legados:</strong> Conversão de processos físicos ou de sistemas legados para o SEI, com mapeamento de tipos documentais e preservação do histórico.</li><li>✦ <strong>Integração com sistemas internos:</strong> Desenvolvimento de APIs e conectores para integrar o SEI a outros sistemas do órgão — financeiro, RH, protocolo e portais de serviços.</li><li>✦ <strong>Capacitação de usuários:</strong> Treinamento presencial e EAD para administradores de sistema, gestores de processo e usuários finais, com material didático personalizado.</li><li>✦ <strong>Suporte técnico especializado:</strong> Atendimento de primeiro e segundo nível para incidentes e dúvidas, com SLA contratual e equipe que conhece as peculiaridades do SEI no setor público.</li><li>✦ <strong>Atualizações e evolução:</strong> Aplicação de novas versões do SEI com zero de downtime, testes em homologação antes de ir para produção e comunicação prévia ao órgão.</li></ul>`
+  },
+  lgpd: {
+    name: 'Adequação para LGPD',
+    badge: '<div class="pc-badge b-est" style="margin-bottom:.75rem">🔹 Produto Estratégico</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Adequação para LGPD.png',
+    intro: 'O serviço de Adequação para LGPD da ETIPI oferece um programa completo de conformidade à Lei Geral de Proteção de Dados para órgãos públicos, abrangendo diagnóstico da situação atual, mapeamento de dados pessoais, elaboração de políticas e procedimentos, designação e suporte ao Encarregado de Dados (DPO), treinamentos para servidores e implantação de plataformas de gestão de incidentes e solicitações de titulares. A ETIPI conduz o órgão da ausência de conformidade à maturidade LGPD de forma estruturada.',
+    pv: `<ul><li>✦ <strong>Diagnóstico de maturidade:</strong> Avaliação da situação atual do órgão em relação à LGPD com mapeamento de gaps, riscos prioritários e roadmap de adequação personalizado.</li><li>✦ <strong>Mapeamento de dados pessoais (RoPA):</strong> Inventário completo dos dados pessoais tratados pelo órgão, por sistema e processo, com classificação de sensibilidade e base legal.</li><li>✦ <strong>Políticas e procedimentos:</strong> Elaboração de Política de Privacidade, Política de Segurança da Informação, procedimentos de resposta a incidentes e termos de consentimento.</li><li>✦ <strong>DPO as a Service:</strong> Designação formal e exercício contínuo da função de Encarregado de Dados (DPO), incluindo canal de atendimento a titulares e relacionamento com a ANPD.</li><li>✦ <strong>Treinamentos para servidores:</strong> Capacitação de toda a equipe sobre direitos dos titulares, boas práticas no tratamento de dados e procedimentos internos de conformidade.</li><li>✦ <strong>Plataforma de gestão LGPD:</strong> Sistema para registro e resposta a solicitações de titulares, gestão de consentimentos e notificação de incidentes à ANPD dentro dos prazos legais.</li></ul>`
+  },
+  cyberseguranca: {
+    name: 'Solução em Cybersegurança',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Solução em Cybersegurança.png',
+    intro: 'A Solução em Cybersegurança da ETIPI oferece um portfólio completo de tecnologias e serviços para proteger a infraestrutura digital dos órgãos públicos contra as ameaças cibernéticas modernas. Da proteção de perímetro com firewalls de próxima geração ao backup corporativo com recuperação garantida, passando por detecção e resposta em endpoints (EDR/XDR) e treinamentos de conscientização, a ETIPI entrega uma postura de segurança robusta e aderente às boas práticas do NIST e às exigências do Decreto nº 10.748/2021.',
+    pv: `<ul><li>✦ <strong>Next-Generation Firewall (NGFW):</strong> Proteção de perímetro com inspeção profunda de pacotes, prevenção de intrusão (IPS), filtro de conteúdo web e controle de aplicações.</li><li>✦ <strong>EDR/XDR em endpoints:</strong> Detecção comportamental de ameaças em estações e servidores, com resposta automática de isolamento e análise forense de incidentes.</li><li>✦ <strong>Backup corporativo com RTO/RPO:</strong> Solução de backup automatizado com testes periódicos de recuperação, deduplicação e criptografia, garantindo RTO e RPO definidos em contrato.</li><li>✦ <strong>Resposta a ransomware:</strong> Playbook específico para incidentes de ransomware, com isolamento de rede, análise do vetor de ataque e recuperação coordenada de backups.</li><li>✦ <strong>Pentest e avaliação de vulnerabilidades:</strong> Testes de intrusão periódicos nos sistemas críticos do órgão para identificar e corrigir vulnerabilidades antes que sejam exploradas.</li><li>✦ <strong>Conscientização de usuários:</strong> Campanhas de phishing simulado e treinamentos interativos para elevar o nível de consciência de segurança de todos os servidores.</li></ul>`
+  },
+  certificadodigital: {
+    name: 'Certificado Digital',
+    badge: '<div class="pc-badge b-trans" style="margin-bottom:.75rem">🟡 Serviço Transversal</div>',
+    vertical: 'Redes e Serviços de TI',
+    img: 'images/Certificado Digital.png',
+    intro: 'A ETIPI atua como Autoridade de Registro (AR) credenciada à ICP-Brasil para emissão de Certificados Digitais para pessoas físicas (e-CPF) e jurídicas (e-CNPJ), com atendimento presencial e remoto para validação de identidade. Os certificados digitais são essenciais para assinatura de contratos eletrônicos, acesso a sistemas governamentais, emissão de notas fiscais e cumprimento de obrigações fiscais e previdenciárias, com validade jurídica idêntica à assinatura manuscrita.',
+    pv: `<ul><li>✦ <strong>e-CPF e e-CNPJ:</strong> Emissão de certificados A1 (software) e A3 (token/cartão) para pessoas físicas e jurídicas, com validade de 1 ou 3 anos conforme a necessidade do cliente.</li><li>✦ <strong>Validação presencial e remota:</strong> Agendamento de validação biométrica em qualquer posto da ETIPI ou videoconferência com prova de vida para clientes em municípios do interior.</li><li>✦ <strong>Certificado para servidor público:</strong> Emissão simplificada de e-CPF para servidores, com desconto institucional e processo integrado ao sistema de RH do órgão.</li><li>✦ <strong>Gestão de frota de certificados:</strong> Painel para órgãos e empresas gerenciarem todos os certificados emitidos, com alertas de vencimento e renovação em massa.</li><li>✦ <strong>Validade jurídica plena:</strong> Certificados emitidos pela ETIPI têm validade jurídica idêntica à assinatura de próprio punho em todo o território nacional, conforme MP 2.200-2/2001.</li><li>✦ <strong>Suporte pós-emissão:</strong> Auxílio na instalação do certificado A1, configuração de token A3, troubleshooting e renovação com atendimento via chat, telefone e e-mail.</li></ul>`
+  }
+};
+</script>
+</body>
+</html>

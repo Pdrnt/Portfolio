@@ -1,0 +1,618 @@
+/* ============================================================
+   MapaHolograma — Estilos
+   Visual holograma futurista / corporativo
+   ============================================================ */
+
+/* ─── Variáveis locais ────────────────────────────────────────────────── */
+:root {
+  --holo-neon:      #00eaff;
+  --holo-neon2:     #0099ff;
+  --holo-neon-dim:  rgba(0, 200, 255, 0.4);
+  --holo-bg:        #020c18;
+  --holo-bg2:       #021428;
+  --holo-border:    rgba(0, 200, 255, 0.18);
+  --holo-text:      rgba(0, 220, 255, 0.85);
+  --holo-text-dim:  rgba(0, 190, 230, 0.5);
+  --holo-font:      'Syne', 'DM Sans', sans-serif;
+}
+
+/* ─── Seção principal ─────────────────────────────────────────────────── */
+.holo-secao {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, #021f3e 0%, var(--holo-bg) 70%);
+  border-radius: 16px;
+  padding: 36px 28px 28px;
+  overflow: hidden;
+  user-select: none;
+  contain: layout style;
+
+  /* Borda neon sutil */
+  border: 1px solid var(--holo-border);
+  box-shadow:
+    0 0 0 1px rgba(0,200,255,0.08),
+    0 8px 48px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(0, 200, 255, 0.12);
+}
+
+/* ─── Grid de fundo (estilo holográfico) ─────────────────────────────── */
+.holo-bg-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: holo-grid-pulse 6s ease-in-out infinite;
+}
+
+@keyframes holo-grid-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1;   }
+}
+
+/* ─── Linha de scan horizontal ───────────────────────────────────────── */
+.holo-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 220, 255, 0.06) 20%,
+    rgba(0, 220, 255, 0.55) 50%,
+    rgba(0, 220, 255, 0.06) 80%,
+    transparent 100%
+  );
+  animation: holo-scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+  will-change: transform;
+}
+
+@keyframes holo-scan {
+  0%   { top: -2px;   opacity: 0; }
+  5%   { opacity: 1;  }
+  95%  { opacity: 1;  }
+  100% { top: 100%;   opacity: 0; }
+}
+
+/* ─── Cantos decorativos ─────────────────────────────────────────────── */
+.holo-corners {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 3;
+}
+.holo-corner--tl { top: 12px; left: 12px;  border-top:   2px solid var(--holo-neon); border-left:  2px solid var(--holo-neon); }
+.holo-corner--tr { top: 12px; right: 12px; border-top:   2px solid var(--holo-neon); border-right: 2px solid var(--holo-neon); }
+.holo-corner--bl { bottom: 12px; left: 12px;  border-bottom: 2px solid var(--holo-neon); border-left:   2px solid var(--holo-neon); }
+.holo-corner--br { bottom: 12px; right: 12px; border-bottom: 2px solid var(--holo-neon); border-right:  2px solid var(--holo-neon); }
+
+/* ─── Cabeçalho ──────────────────────────────────────────────────────── */
+.holo-header {
+  text-align: center;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 4;
+}
+
+.holo-header__eyebrow {
+  font-family: var(--holo-font);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--holo-text-dim);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.holo-header__title {
+  font-family: var(--holo-font);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 24px rgba(0, 200, 255, 0.4);
+}
+
+.holo-header__title span {
+  color: var(--holo-neon);
+  text-shadow: 0 0 20px var(--holo-neon), 0 0 40px rgba(0,220,255,0.4);
+}
+
+.holo-header__sub {
+  font-size: 0.85rem;
+  color: var(--holo-text-dim);
+}
+
+.holo-header__sub strong {
+  color: var(--holo-neon);
+}
+
+/* ─── Wrapper do SVG do mapa ─────────────────────────────────────────── */
+.holo-map-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 20, 50, 0.5);
+  border: 1px solid var(--holo-border);
+  z-index: 4;
+    /* Avoid creating a separate stacking context for the map wrapper
+      so page content (hero) can overlay it. Removing will-change/transform
+      hints prevents the browser from promoting this element to its own
+      composited layer in a way that interferes with z-index ordering. */
+    will-change: auto;
+    z-index: 0 !important;
+
+  /* Pulsação suave */
+  animation: holo-pulse 5s ease-in-out infinite;
+}
+
+@keyframes holo-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(0,200,255,0.15), inset 0 0 20px rgba(0,100,200,0.05); }
+  50%       { box-shadow: 0 0 28px rgba(0,200,255,0.30), inset 0 0 32px rgba(0,130,220,0.10); }
+}
+
+/* ── Efeito glitch ── */
+.holo-map-wrapper--glitch {
+  animation: holo-glitch 0.22s steps(1) forwards;
+}
+
+@keyframes holo-glitch {
+  0%   { opacity: 1;    filter: none;                                transform: translate(0, 0); }
+  15%  { opacity: 0.3;  filter: brightness(2) saturate(0);          transform: translate(-3px, 1px); }
+  30%  { opacity: 0.85; filter: hue-rotate(180deg) brightness(1.6); transform: translate(2px, -2px); }
+  55%  { opacity: 0.4;  filter: brightness(0.4);                    transform: translate(0, 0); }
+  75%  { opacity: 0.95; filter: saturate(2) brightness(1.3);        transform: translate(1px, 0); }
+  90%  { opacity: 0.7;  filter: brightness(1.8);                    transform: translate(-1px, 1px); }
+  100% { opacity: 1;    filter: none;                                transform: translate(0, 0); }
+}
+
+/* ── Glow radial atrás do mapa ── */
+.holo-map-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,100,200,0.15) 0%, transparent 70%);
+  z-index: 1;
+}
+
+/* ── SVG do mapa ── */
+.holo-map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: grab;
+  position: relative;
+  z-index: 2;
+  will-change: transform;
+}
+
+.holo-map-svg:active {
+  cursor: grabbing;
+}
+
+/* ── Overlay de scan sobre o mapa ── */
+.holo-map-scan-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 200, 255, 0.025) 3px,
+    rgba(0, 200, 255, 0.025) 4px
+  );
+  z-index: 3;
+  mix-blend-mode: screen;
+}
+
+/* ─── Botão reset ────────────────────────────────────────────────────── */
+.holo-btn-reset {
+  position: absolute;
+  top: 16px;
+  right: 52px;
+  z-index: 10;
+  background: rgba(0, 30, 60, 0.9);
+  border: 1px solid var(--holo-neon);
+  color: var(--holo-neon);
+  font-family: var(--holo-font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.holo-btn-reset:hover {
+  background: rgba(0, 200, 255, 0.12);
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.4);
+}
+
+.holo-btn-reset:focus-visible,
+.holo-city-dash__close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 234, 255, 0.35);
+}
+
+/* ─── Tooltip ────────────────────────────────────────────────────────── */
+.holo-tooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+  background: rgba(0, 18, 40, 0.92);
+  border: 1px solid var(--holo-neon);
+  color: var(--holo-neon);
+  font-family: var(--holo-font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.35);
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+
+/* ─── Pins ───────────────────────────────────────────────────────────── */
+.holo-pin {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+/* Sede */
+.holo-pin-halo {
+  fill:             rgba(0, 220, 255, 0.10);
+  stroke:           rgba(0, 220, 255, 0.30);
+  stroke-width:     1;
+  transform-box:    fill-box;
+  transform-origin: center;
+  animation: holo-pin-halo-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes holo-pin-halo-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1);    }
+  50%       { opacity: 0.15; transform: scale(1.35); }
+}
+
+.holo-pin-core-sede {
+  fill:   var(--holo-neon);
+  filter: drop-shadow(0 0 6px var(--holo-neon));
+}
+
+.holo-pin-ring {
+  fill:             none;
+  stroke:           var(--holo-neon);
+  stroke-width:     1;
+  opacity:          0.5;
+  transform-box:    fill-box;
+  transform-origin: center;
+  animation:        holo-pin-ring-spin 4s linear infinite;
+  stroke-dasharray: 8 5;
+}
+
+@keyframes holo-pin-ring-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+/* Sem classes de capital/cidade — removidas */
+
+/* ─── Legenda ────────────────────────────────────────────────────────── */
+.holo-legenda {
+  display:      flex;
+  flex-wrap:    wrap;
+  gap:          12px 24px;
+  margin-top:   16px;
+  padding:      10px 14px;
+  background:   rgba(0, 10, 30, 0.5);
+  border:       1px solid var(--holo-border);
+  border-radius: 8px;
+  position:     relative;
+  z-index:      4;
+}
+
+.holo-legenda__item {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+  font-family: var(--holo-font);
+  font-size:   0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color:       var(--holo-text-dim);
+  text-transform: uppercase;
+}
+
+.holo-legenda__dot {
+  width:        10px;
+  height:       10px;
+  border-radius: 50%;
+  flex-shrink:  0;
+}
+
+.holo-legenda__dot--sede      { background: var(--holo-neon); box-shadow: 0 0 6px var(--holo-neon); }
+.holo-legenda__dot--parceiro  { background: rgba(0,30,90,0.95); border: 1.5px solid rgba(0,180,255,0.75); box-shadow: 0 0 6px rgba(0,120,255,0.5); }
+.holo-legenda__dot--piaui     { background: rgba(0,200,255,0.4); border: 1px solid var(--holo-neon); box-shadow: 0 0 6px var(--holo-neon); }
+
+/* ─── Responsivo ─────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .holo-secao {
+    padding: 24px 14px 20px;
+  }
+  .holo-header__title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .holo-legenda {
+    gap: 12px 16px;
+  }
+  .holo-btn-reset {
+    top: 12px;
+    right: 40px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PINS NACIONAIS  (capital / cidade — círculo + label)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Círculo base */
+.holo-pin-nacional {
+  fill:         #00eaff;
+  stroke:       rgba(0, 10, 30, 0.7);
+  stroke-width: 1;
+  filter:       drop-shadow(0 0 5px #00eaff);
+  cursor:       default;
+}
+
+.holo-pin-nacional--capital {
+  fill:   #00eaff;
+  filter: drop-shadow(0 0 6px #00eaff);
+}
+
+.holo-pin-nacional--cidade {
+  fill:   #00bcd4;
+  filter: drop-shadow(0 0 5px #00bcd4);
+}
+
+/* Label do pin — pequeno, neon, sem interação */
+.holo-pin-label {
+  font-family:    var(--holo-font);
+  font-size:      8px;
+  font-weight:    600;
+  fill:           #00eaff;
+  text-anchor:    middle;
+  paint-order:    stroke;
+  stroke:         rgba(0, 5, 18, 0.85);
+  stroke-width:   3px;
+  stroke-linejoin: round;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+  user-select:    none;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MUNICÍPIOS PARCEIROS  (cursor interativo)
+   ══════════════════════════════════════════════════════════════════ */
+.holo-mun-parceiro {
+  cursor: pointer;
+}
+
+.holo-map-svg [role="button"]:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.holo-state-selected {
+  filter: drop-shadow(0 0 9px rgba(0, 234, 255, 0.75));
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ELEVAÇÃO HOLOGRÁFICA  — overlay sobre estados parceiros
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Base: respiração sutil de opacidade no estado parceiro */
+@keyframes holo-partner-pulse {
+  0%, 100% { opacity: 1;    }
+  50%       { opacity: 0.70; }
+}
+.holo-state-partner {
+  animation: holo-partner-pulse 3.5s ease-in-out infinite;
+}
+
+/* Overlay: glow pulsante invertido (fora de fase) — cria profundidade */
+@keyframes holo-elevation-pulse {
+  0%, 100% { opacity: 0.45; }
+  50%       { opacity: 1.00; }
+}
+.holo-elevation-layer {
+  animation:       holo-elevation-pulse 3.5s ease-in-out infinite;
+  animation-delay: -1.75s;   /* meia fase: overlay pulsa CONTRA a base */
+  pointer-events:  none;     /* <-- crítico: não bloquear cliques nos estados */
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MODO ZOOM (foco no Piauí)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Whole section pauses decorative animations when zoomed in */
+.holo-secao--zoomed .holo-bg-grid {
+  animation: none;
+  opacity:   0.25;
+}
+.holo-secao--zoomed .holo-scan-line { display: none; }
+
+/* ── Animação de saída ao entrar em Teresina ───────────────────────────── */
+.holo-secao--exiting {
+  animation: holo-exit-teresina 0.5s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes holo-exit-teresina {
+  0%   { opacity: 1;   transform: scale(1);    filter: blur(0px);   }
+  60%  { opacity: 0.4; transform: scale(1.08); filter: blur(1px);   }
+  100% { opacity: 0;   transform: scale(1.18); filter: blur(4px);   }
+}
+
+/* Map wrapper: soft glow replaces hard pulse */
+.holo-map-wrapper--zoomed {
+  animation: holo-pulse-soft 4s ease-in-out infinite;
+}
+
+@keyframes holo-pulse-soft {
+  0%, 100% { box-shadow: 0 0 14px rgba(0,200,255,0.18), inset 0 0 22px rgba(0,100,200,0.06); }
+  50%       { box-shadow: 0 0 30px rgba(0,200,255,0.26), inset 0 0 36px rgba(0,130,220,0.10); }
+}
+
+/* Freeze animations descendentes (pins, elevation) no zoom */
+.holo-secao--zoomed .holo-elevation-layer,
+.holo-secao--zoomed .holo-state-partner {
+  animation: none !important;
+}
+
+/* Utilitário: congela animações em qualquer sub-árvore */
+.no-anim,
+.no-anim * {
+  animation: none !important;
+}
+
+/* Pins halo / ring: escondidos no modo zoom (evita "radares") */
+.holo-secao--zoomed .holo-pin-halo,
+.holo-secao--zoomed .holo-pin-ring {
+  animation: none !important;
+  display:   none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   LOGO SEDE  — overlay HTML absolutamente posicionado
+   ══════════════════════════════════════════════════════════════════ */
+.holo-logo-sede {
+  position:   absolute;
+  left:       51%;
+  top:        20%;
+  transform:  translate(-50%, -100%) translateY(-6px);
+  z-index:    8;
+  pointer-events: auto;
+  cursor:     pointer;
+  animation:  none !important;
+  border:     none;
+  background: transparent;
+  padding:    0;
+  will-change: left, top;
+}
+
+.holo-logo-sede:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+.holo-logo-sede__circle {
+  width:         72px;
+  height:        72px;
+  border-radius: 50%;
+  overflow:      hidden;
+  background:    rgba(0, 12, 36, 0.92);
+  border:        2px solid #00eaff;
+  box-shadow:    0 0 0 0 rgba(0,234,255,0.6);
+  animation:     holo-logo-pulse 2.5s ease-in-out infinite;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+}
+
+@keyframes holo-logo-pulse {
+  0%, 100% { box-shadow: 0 0 8px 2px rgba(0,234,255,0.45); }
+  50%       { box-shadow: 0 0 20px 6px rgba(0,234,255,0.20); }
+}
+
+.holo-logo-sede img {
+  width:            60px;
+  height:           60px;
+  object-fit:       contain;
+  image-rendering:  crisp-edges;
+}
+
+.holo-logo-sede__pointer {
+  width:        0;
+  height:       0;
+  margin:       0 auto;
+  border-left:  6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top:   8px solid #00eaff;
+  filter:       drop-shadow(0 0 3px #00eaff);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CITY DASH  — card de info da cidade selecionada
+   ══════════════════════════════════════════════════════════════════ */
+.holo-city-dash {
+  position:   absolute;
+  bottom:     14px;
+  left:       14px;
+  z-index:    15;
+  background: rgba(0, 10, 32, 0.88);
+  border:     1px solid rgba(0, 200, 255, 0.35);
+  border-radius: 10px;
+  padding:    13px 16px;
+  min-width:  170px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 18px rgba(0, 180, 255, 0.18);
+  animation:  holo-dash-in 0.28s ease both;
+}
+
+@keyframes holo-dash-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.holo-city-dash__close {
+  position:   absolute;
+  top:        6px;
+  right:      9px;
+  background: none;
+  border:     none;
+  color:      rgba(0, 200, 255, 0.55);
+  font-size:  1rem;
+  cursor:     pointer;
+  line-height: 1;
+  padding:    0;
+}
+.holo-city-dash__close:hover { color: #00eaff; }
+
+.holo-city-dash__name {
+  font-family:    var(--holo-font);
+  font-size:      0.9rem;
+  font-weight:    700;
+  color:          #00eaff;
+  margin-bottom:  4px;
+  letter-spacing: 0.04em;
+  text-shadow:    0 0 10px rgba(0, 234, 255, 0.5);
+}
+
+.holo-city-dash__produto {
+  font-size:  0.73rem;
+  color:      rgba(160, 220, 255, 0.75);
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   LEGENDA — items extras
+   ══════════════════════════════════════════════════════════════════ */
+.holo-legenda__dot--piauiativo { background: rgba(0,200,255,0.28); border: 1.5px solid #00eaff; }
