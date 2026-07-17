@@ -31,6 +31,11 @@ export default function ColmeiaPage() {
 
       <section className="sec" style={{ minHeight: '100vh', paddingTop: '80px' }}>
         <div className="rev" style={{ marginBottom: '40px' }}>
+          <button
+            onClick={() => navigate('/')}
+            className="btn-o"
+            style={{ marginBottom: '20px', display: 'inline-flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}
+          >← Voltar para a página principal</button>
           <span className="sec-lbl">Catálogo Completo</span>
           <h2 className="sec-title">Visualização Colmeia</h2>
           <p className="sec-sub">Explore o portfólio completo em uma visualização interativa por vertical de atuação.</p>
