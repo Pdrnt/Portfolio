@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import "../styles/colmeia.css"
 
 const VERTICALS = [
@@ -233,6 +233,23 @@ export default function ColmeiaView({ onBack }) {
   const [fType, setFType] = useState("all")
   const [detail, setDetail] = useState(null)
   const comb = useMemo(buildComb, [])
+  const combScrollRef = useRef(null)
+  const [combFit, setCombFit] = useState({ scale: 1, offsetX: 0 })
+
+  useEffect(() => {
+    const el = combScrollRef.current
+    if (!el) return
+    const fit = () => {
+      const available = el.clientWidth
+      const scale = available < comb.width ? Math.max(available / comb.width, 0.42) : 1
+      const offsetX = Math.max(0, (available - comb.width * scale) / 2)
+      setCombFit({ scale, offsetX })
+    }
+    fit()
+    const ro = new ResizeObserver(fit)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [comb.width])
 
   const shown = useMemo(() => PRODUCTS.filter((p) => {
     if (fVert !== "all" && p.v !== fVert) return false
@@ -317,8 +334,8 @@ export default function ColmeiaView({ onBack }) {
           </div>
         </aside>
 
-        <div className="honey-comb-scroll">
-          <div className="honey-comb" style={{ width: comb.width, height: comb.height }}>
+        <div className="honey-comb-scroll" ref={combScrollRef} style={{ height: comb.height * combFit.scale }}>
+          <div className="honey-comb" style={{ width: comb.width, height: comb.height, transform: `translateX(${combFit.offsetX}px) scale(${combFit.scale})`, transformOrigin: 'top left' }}>
             {comb.halos.map(({ v, x, y, w, h }) => <div key={v.id} className="honey-halo" style={{ left: x, top: y, width: w, height: h, background: `radial-gradient(closest-side, ${hexA(v.color, .85)}, ${hexA(v.color, .4)} 62%, transparent)` }} />)}
             {comb.labels.map(({ v, x, y, lineX, lineTop, lineHeight }) => (
               <div key={v.id}>
