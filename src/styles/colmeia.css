@@ -47,3 +47,4 @@
 .colmeia-sec .honey{flex:1;display:flex;flex-direction:column;align-items:stretch}
 .colmeia-sec .honey-back{align-self:flex-start}
 .colmeia-sec .honey-layout{flex:1}
+.colmeia-sec .honey{border-radius:0!important}
