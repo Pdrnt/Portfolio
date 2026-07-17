@@ -2,7 +2,9 @@ FROM node:20-alpine AS build
 WORKDIR /app
 
 ARG VITE_API_URL=https://portfolio.etipi.pi.gov.br
+ARG VITE_MAPBOX_TOKEN
 ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_MAPBOX_TOKEN=$VITE_MAPBOX_TOKEN
 
 COPY package*.json ./
 RUN npm ci
