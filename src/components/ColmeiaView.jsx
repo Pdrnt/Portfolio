@@ -235,16 +235,15 @@ export default function ColmeiaView({ onBack }) {
   const [sidebarOpen, setSidebarOpen] = useState(() => typeof window !== "undefined" && window.innerWidth > 920)
   const comb = useMemo(buildComb, [])
   const combScrollRef = useRef(null)
-  const [combFit, setCombFit] = useState({ scale: 1, offsetX: 0 })
+  const [combFit, setCombFit] = useState({ scale: 1 })
 
   useEffect(() => {
     const el = combScrollRef.current
     if (!el) return
     const fit = () => {
       const available = el.clientWidth
-      const scale = available < comb.width ? Math.max(available / comb.width, 0.42) : 1
-      const offsetX = Math.max(0, (available - comb.width * scale) / 2)
-      setCombFit({ scale, offsetX })
+      const scale = available < comb.width ? Math.max(available / comb.width, 0.34) : 1
+      setCombFit({ scale })
     }
     fit()
     const ro = new ResizeObserver(fit)
@@ -342,8 +341,9 @@ export default function ColmeiaView({ onBack }) {
           )}
         </aside>
 
-        <div className="honey-comb-scroll" ref={combScrollRef} style={{ height: comb.height * combFit.scale }}>
-          <div className="honey-comb" style={{ width: comb.width, height: comb.height, transform: `translateX(${combFit.offsetX}px) scale(${combFit.scale})`, transformOrigin: 'top left' }}>
+        <div className="honey-comb-scroll" ref={combScrollRef}>
+          <div className="honey-comb-frame" style={{ width: comb.width * combFit.scale, height: comb.height * combFit.scale }}>
+          <div className="honey-comb" style={{ width: comb.width, height: comb.height, transform: `scale(${combFit.scale})`, transformOrigin: 'top left' }}>
             {comb.halos.map(({ v, x, y, w, h }) => <div key={v.id} className="honey-halo" style={{ left: x, top: y, width: w, height: h, background: `radial-gradient(closest-side, ${hexA(v.color, .85)}, ${hexA(v.color, .4)} 62%, transparent)` }} />)}
             {comb.labels.map(({ v, x, y, lineX, lineTop, lineHeight }) => (
               <div key={v.id}>
@@ -365,6 +365,7 @@ export default function ColmeiaView({ onBack }) {
                 </button>
               )
             })}
+          </div>
           </div>
         </div>
       </div>
