@@ -236,6 +236,9 @@ export default function ColmeiaView({ onBack }) {
   const comb = useMemo(buildComb, [])
   const combScrollRef = useRef(null)
   const [combFit, setCombFit] = useState({ scale: 1 })
+  const [pinchZoom, setPinchZoom] = useState(1)
+  const [selected, setSelected] = useState(null)
+  const isTouch = useMemo(() => typeof window !== "undefined" && window.matchMedia("(hover: none)").matches, [])
 
   useEffect(() => {
     const el = combScrollRef.current
@@ -250,6 +253,43 @@ export default function ColmeiaView({ onBack }) {
     ro.observe(el)
     return () => ro.disconnect()
   }, [comb.width])
+
+  useEffect(() => {
+    const el = combScrollRef.current
+    if (!el || !isTouch) return
+    let startDist = 0
+    let startZoom = 1
+    const dist = (touches) => Math.hypot(touches[0].clientX - touches[1].clientX, touches[0].clientY - touches[1].clientY)
+    const onStart = (e) => {
+      if (e.touches.length === 2) {
+        startDist = dist(e.touches)
+        startZoom = pinchZoom
+      }
+    }
+    const onMove = (e) => {
+      if (e.touches.length === 2 && startDist) {
+        e.preventDefault()
+        const factor = dist(e.touches) / startDist
+        setPinchZoom(Math.min(3, Math.max(1, startZoom * factor)))
+      }
+    }
+    const onEnd = (e) => { if (e.touches.length < 2) startDist = 0 }
+    el.addEventListener("touchstart", onStart, { passive: true })
+    el.addEventListener("touchmove", onMove, { passive: false })
+    el.addEventListener("touchend", onEnd)
+    return () => {
+      el.removeEventListener("touchstart", onStart)
+      el.removeEventListener("touchmove", onMove)
+      el.removeEventListener("touchend", onEnd)
+    }
+  }, [isTouch, pinchZoom])
+
+  const totalScale = combFit.scale * pinchZoom
+
+  const handleHexClick = (p) => {
+    if (!isTouch) { setDetail(p); return }
+    if (selected === p.n) { setDetail(p); setSelected(null) } else { setSelected(p.n) }
+  }
 
   const shown = useMemo(() => PRODUCTS.filter((p) => {
     if (fVert !== "all" && p.v !== fVert) return false
@@ -342,8 +382,8 @@ export default function ColmeiaView({ onBack }) {
         </aside>
 
         <div className="honey-comb-scroll" ref={combScrollRef}>
-          <div className="honey-comb-frame" style={{ width: comb.width * combFit.scale, height: comb.height * combFit.scale }}>
-          <div className="honey-comb" style={{ width: comb.width, height: comb.height, transform: `scale(${combFit.scale})`, transformOrigin: 'top left' }}>
+          <div className="honey-comb-frame" style={{ width: comb.width * totalScale, height: comb.height * totalScale }}>
+          <div className="honey-comb" onClick={(e) => { if (e.target === e.currentTarget) setSelected(null) }} style={{ width: comb.width, height: comb.height, transform: `scale(${totalScale})`, transformOrigin: 'top left' }}>
             {comb.halos.map(({ v, x, y, w, h }) => <div key={v.id} className="honey-halo" style={{ left: x, top: y, width: w, height: h, background: `radial-gradient(closest-side, ${hexA(v.color, .85)}, ${hexA(v.color, .4)} 62%, transparent)` }} />)}
             {comb.labels.map(({ v, x, y, lineX, lineTop, lineHeight }) => (
               <div key={v.id}>
@@ -357,7 +397,7 @@ export default function ColmeiaView({ onBack }) {
               const isCenter = p.v === "gov"
               const dim = active && !shownNames.has(p.n)
               return (
-                <button key={p.n} className={`honey-hex${isCenter ? " center" : ""}${dim ? " dim" : ""}`} style={{ left: ce.x - comb.W / 2, top: ce.y - comb.H / 2, width: comb.W, height: comb.H }} onClick={() => setDetail(p)}>
+                <button key={p.n} className={`honey-hex${isCenter ? " center" : ""}${dim ? " dim" : ""}${selected === p.n ? " sel" : ""}`} style={{ left: ce.x - comb.W / 2, top: ce.y - comb.H / 2, width: comb.W, height: comb.H }} onClick={() => handleHexClick(p)}>
                   <span className="honey-shape" style={{ boxShadow: `inset 0 0 0 2px ${hexA(v.color, isCenter ? 0 : .55)}` }}>
                     <span className="honey-ic" style={{ color: isCenter ? "#06283a" : v.color }}><Icon name={p.ic} /></span>
                   </span>
