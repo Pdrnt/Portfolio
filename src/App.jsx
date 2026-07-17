@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 import "./portfolio.css"
 import MapaHolograma from "./components/MapaHolograma"
-import ProposalCard from "./components/ProposalCard"
 import { PRODUCTS, CAROUSEL_ITEMS, CATALOG_ITEMS } from "./data/products"
 import ColmeiaPage from "./pages/ColmeiaPage"
 
@@ -245,9 +244,6 @@ function HomePage() {
         </div>
         <div className="fc" />
       </footer>
-
-      {/* FLOATING PROPOSAL CARD */}
-      <ProposalCard />
 
       {/* MODAL */}
       <div
