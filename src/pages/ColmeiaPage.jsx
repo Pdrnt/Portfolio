@@ -29,31 +29,8 @@ export default function ColmeiaPage() {
         <button className="nav-cta" onClick={() => navigate('/#contato')}>Fale Conosco</button>
       </nav>
 
-      <section className="sec" style={{ paddingTop: '100px' }}>
-        <div style={{ marginBottom: '24px' }}>
-          <button
-            onClick={() => navigate('/')}
-            style={{
-              marginBottom: '20px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              cursor: 'pointer',
-              background: 'transparent',
-              color: '#1a1a2e',
-              border: '1.5px solid rgba(0,0,0,.2)',
-              borderRadius: '8px',
-              padding: '10px 22px',
-              fontSize: '.9rem',
-              fontWeight: 600,
-              fontFamily: 'var(--font)',
-            }}
-          >← Voltar para a página principal</button>
-          <span className="sec-lbl">Catálogo Completo</span>
-          <h2 className="sec-title">Visualização Colmeia</h2>
-          <p className="sec-sub">Explore o portfólio completo em uma visualização interativa por vertical de atuação.</p>
-        </div>
-        <ColmeiaView />
+      <section className="sec" style={{ paddingTop: '92px' }}>
+        <ColmeiaView onBack={() => navigate('/')} />
       </section>
 
       <footer>

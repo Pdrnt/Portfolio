@@ -227,7 +227,7 @@ function buildComb() {
   return { W, H, width, height, cells, labels, halos }
 }
 
-export default function ColmeiaView() {
+export default function ColmeiaView({ onBack }) {
   const [q, setQ] = useState("")
   const [fVert, setFVert] = useState("all")
   const [fType, setFType] = useState("all")
@@ -262,6 +262,12 @@ export default function ColmeiaView() {
   return (
     <div className="honey">
       <div className="honey-bg" />
+      {onBack && (
+        <button className="honey-back" style={{ marginBottom: 18 }} onClick={onBack}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
+          Voltar para a página principal
+        </button>
+      )}
       <header className="honey-head">
         <div className="honey-brand">
           <span className="honey-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20L20 4M20 4H9M20 4V15" stroke="#22cfe8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
