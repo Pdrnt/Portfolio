@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import "./portfolio.css"
 import MapaHolograma from "./components/MapaHolograma"
 import ProposalCard from "./components/ProposalCard"
+import ColmeiaView from "./components/ColmeiaView"
 import { PRODUCTS, CAROUSEL_ITEMS, CATALOG_ITEMS } from "./data/products"
 
 const DOUBLED_CAROUSEL = [...CAROUSEL_ITEMS, ...CAROUSEL_ITEMS]
@@ -19,6 +20,7 @@ const FILTERS = [
 export default function App() {
   const [navShadow, setNavShadow] = useState(false)
   const [activeFilter, setActiveFilter] = useState('todos')
+  const [catalogView, setCatalogView] = useState('products')
   const [modal, setModal] = useState(null)
 
   useEffect(() => {
@@ -89,7 +91,7 @@ export default function App() {
         <div className="hero-stats">
           <div className="stat"><div className="stat-n">30<em>+</em></div><div className="stat-l">Produtos &amp; Serviços</div></div>
           <div className="stat"><div className="stat-n">6</div><div className="stat-l">Verticais de Inovação</div></div>
-          <div className="stat"><div className="stat-n">5<em>+</em></div><div className="stat-l">Estados Atendidos</div></div>
+          <div className="stat"><div className="stat-n">7<em>+</em></div><div className="stat-l">Estados Atendidos</div></div>
           <div className="stat"><div className="stat-n">300<em>+</em></div><div className="stat-l">Serviços Digitais</div></div>
         </div>
         <div className="hero-cut" />
@@ -144,32 +146,48 @@ export default function App() {
       <section className="sec" id="catalogo">
         <div className="rev">
           <span className="sec-lbl">Catálogo Completo</span>
-          <h2 className="sec-title">Todos os Produtos</h2>
+          <h2 className="sec-title">{catalogView === 'products' ? 'Todos os Produtos' : 'Visualização Colmeia'}</h2>
           <p className="sec-sub">Explore o portfólio completo filtrando por vertical de atuação.</p>
         </div>
-        <div className="prod-tabs">
-          {FILTERS.map(f => (
-            <button
-              key={f.id}
-              className={`tab${activeFilter === f.id ? ' on' : ''}`}
-              onClick={() => setActiveFilter(f.id)}
-            >{f.label}</button>
-          ))}
+        <div className="catalog-view-tabs">
+          <button
+            className={`tab${catalogView === 'products' ? ' on' : ''}`}
+            onClick={() => setCatalogView('products')}
+          >Todos os Produtos</button>
+          <button
+            className={`tab${catalogView === 'honey' ? ' on' : ''}`}
+            onClick={() => setCatalogView('honey')}
+          >Visualização Colmeia</button>
         </div>
-        <div className="pg">
-          {CATALOG_ITEMS.filter(showItem).map((item) => (
-            <div key={item.key + item.cat} className="pi" onClick={() => openProduct(item.key)}>
-              <img className="pi-img" src={item.img} alt={item.name} />
-              <div className="pi-body">
-                <div className="pi-top">
-                  <div className="pi-name">{item.name}</div>
-                  <span className={`pc-badge ${item.badge}`} style={{ fontSize: '.62rem', padding: '2px 7px', whiteSpace: 'nowrap' }}>{item.badgeText}</span>
-                </div>
-                <div className="pi-desc">{item.desc}</div>
-              </div>
+        {catalogView === 'products' ? (
+          <>
+            <div className="prod-tabs">
+              {FILTERS.map(f => (
+                <button
+                  key={f.id}
+                  className={`tab${activeFilter === f.id ? ' on' : ''}`}
+                  onClick={() => setActiveFilter(f.id)}
+                >{f.label}</button>
+              ))}
             </div>
-          ))}
-        </div>
+            <div className="pg">
+              {CATALOG_ITEMS.filter(showItem).map((item) => (
+                <div key={item.key + item.cat} className="pi" onClick={() => openProduct(item.key)}>
+                  <img className="pi-img" src={item.img} alt={item.name} />
+                  <div className="pi-body">
+                    <div className="pi-top">
+                      <div className="pi-name">{item.name}</div>
+                      <span className={`pc-badge ${item.badge}`} style={{ fontSize: '.62rem', padding: '2px 7px', whiteSpace: 'nowrap' }}>{item.badgeText}</span>
+                    </div>
+                    <div className="pi-desc">{item.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <ColmeiaView />
+        )}
       </section>
 
       {/* CLIENTES + MAPA */}
@@ -186,6 +204,9 @@ export default function App() {
               <div className="cc"><div className="cc-s">🌳 Pará</div><div className="cc-d">Telessaúde IASEP com teleconsultas para segurados e dependentes do Instituto de Assistência dos Servidores.</div></div>
               <div className="cc"><div className="cc-s">🌻 Pernambuco</div><div className="cc-d">Parcerias em gestão de estoque e saúde pública, incluindo o Credencia PE na administração.</div></div>
               <div className="cc"><div className="cc-s">🌾 Goiás</div><div className="cc-d">Implantação do Sistema de Gestão de Pessoas para modernização da administração de servidores.</div></div>
+              <div className="cc"><div className="cc-s">🌊 Maranhão</div><div className="cc-d">Soluções de tecnologia da informação para órgãos estaduais, expandindo a presença da ETIPI no Nordeste.</div></div>
+              <div className="cc"><div className="cc-s">🏛️ Distrito Federal</div><div className="cc-d">Articulação institucional e parcerias estratégicas com órgãos federais para ampliar soluções de governo digital.</div></div>
+              <div className="cc"><div className="cc-s">🌵 Piauí</div><div className="cc-d">Estado sede da ETIPI, com soluções em todas as verticais atendendo centenas de órgãos estaduais e municipais.</div></div>
             </div>
             <div className="chips rev">
               <div className="chip">Governo do Piauí</div><div className="chip">Secretarias Estaduais</div>

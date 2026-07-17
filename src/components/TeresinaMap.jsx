@@ -15,7 +15,10 @@ import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import "../styles/teresina-map.css"
 
-const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
+// ─── Configuração ─────────────────────────────────────────────────────────────
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
+
+// CENTER e ZOOM serão definidos dinamicamente abaixo
 
 const STYLES = {
   dark:      "mapbox://styles/mapbox/dark-v11",
@@ -199,12 +202,6 @@ export default function TeresinaMap({ onBack = null, onOrgaoSelect = null }) {
   // ── Inicializar mapa ──────────────────────────────────────────────────────
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return
-    if (!MAPBOX_TOKEN) {
-      console.warn("VITE_MAPBOX_TOKEN nao definido.")
-      return
-    }
-
-    mapboxgl.accessToken = MAPBOX_TOKEN
 
     const map = new mapboxgl.Map({
       container:  containerRef.current,

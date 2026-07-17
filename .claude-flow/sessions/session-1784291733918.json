@@ -1,0 +1,14 @@
+{
+  "id": "session-1784291733918",
+  "startedAt": "2026-07-17T12:35:33.918Z",
+  "cwd": "/home/pedro/Documents/projetos ETIPI/Portfolio",
+  "context": {},
+  "metrics": {
+    "edits": 0,
+    "commands": 0,
+    "tasks": 0,
+    "errors": 0
+  },
+  "endedAt": "2026-07-17T12:47:46.984Z",
+  "duration": 733066
+}
