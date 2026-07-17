@@ -232,6 +232,7 @@ export default function ColmeiaView({ onBack }) {
   const [fVert, setFVert] = useState("all")
   const [fType, setFType] = useState("all")
   const [detail, setDetail] = useState(null)
+  const [sidebarOpen, setSidebarOpen] = useState(() => typeof window !== "undefined" && window.innerWidth > 920)
   const comb = useMemo(buildComb, [])
   const combScrollRef = useRef(null)
   const [combFit, setCombFit] = useState({ scale: 1, offsetX: 0 })
@@ -299,8 +300,13 @@ export default function ColmeiaView({ onBack }) {
       </div>
 
       <div className="honey-layout">
-        <aside className="honey-sidebar">
-          <div className="honey-side-h">Encontrar um produto</div>
+        <aside className={`honey-sidebar${sidebarOpen ? "" : " collapsed"}`}>
+          <button className="honey-side-toggle" onClick={() => setSidebarOpen((o) => !o)}>
+            <span className="honey-side-h">Encontrar um produto</span>
+            <svg className="honey-side-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+          </button>
+          {sidebarOpen && (
+          <>
           <div className={`honey-search${q ? " has" : ""}`}>
             <svg className="honey-si" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" /></svg>
             <input value={q} onChange={(e) => setQ(e.target.value)} type="text" placeholder="Buscar por nome ou palavra-chave..." />
@@ -332,6 +338,8 @@ export default function ColmeiaView({ onBack }) {
               )
             }) : <div className="honey-no-res">Nenhum produto encontrado.</div>}
           </div>
+          </>
+          )}
         </aside>
 
         <div className="honey-comb-scroll" ref={combScrollRef} style={{ height: comb.height * combFit.scale }}>

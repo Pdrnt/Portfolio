@@ -14,7 +14,12 @@
 .honey-hero{margin:24px 0 6px}.honey-hero h3{font-size:25px;font-weight:700;line-height:1.15;color:#fff}.honey-hero h3 i{color:var(--h-cyan);font-style:italic}.honey-hero p{color:var(--h-dim);font-size:13.5px;margin-top:7px;max-width:680px;line-height:1.45}
 .honey-layout{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:start;margin-top:8px}
 .honey-sidebar{position:sticky;top:86px;background:rgba(255,255,255,.045);border:1px solid var(--h-line);border-radius:18px;padding:18px 16px;backdrop-filter:blur(4px)}
-.honey-side-h{font-size:13px;font-weight:800;letter-spacing:.3px;margin-bottom:12px}.honey-search{position:relative;display:flex;align-items:center;margin-bottom:16px}.honey-si{position:absolute;left:12px;color:var(--h-dim);pointer-events:none}
+.honey-side-h{font-size:13px;font-weight:800;letter-spacing:.3px}
+.honey-side-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;padding:0;margin-bottom:12px;color:var(--h-txt);cursor:pointer;font-family:inherit}
+.honey-side-chev{color:var(--h-dim);flex:0 0 auto;transition:transform .2s}
+.honey-sidebar.collapsed .honey-side-toggle{margin-bottom:0}
+.honey-sidebar.collapsed .honey-side-chev{transform:rotate(-90deg)}
+.honey-search{position:relative;display:flex;align-items:center;margin-bottom:16px}.honey-si{position:absolute;left:12px;color:var(--h-dim);pointer-events:none}
 .honey-search input{width:100%;padding:11px 32px 11px 36px;border-radius:11px;border:1px solid var(--h-line);background:rgba(8,16,38,.5);color:var(--h-txt);font-family:inherit;font-size:13px;outline:none;transition:border-color .15s}.honey-search input:focus{border-color:var(--h-cyan)}.honey-search input::placeholder{color:var(--h-dim)}
 .honey-clr{position:absolute;right:8px;width:22px;height:22px;border-radius:7px;border:none;background:transparent;color:var(--h-dim);font-size:17px;cursor:pointer;display:none;line-height:1}.honey-clr:hover{background:rgba(255,255,255,.1);color:#fff}.honey-search.has .honey-clr{display:block}
 .honey-filt-label{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--h-dim);font-weight:700;margin:0 0 8px 2px}.honey-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
