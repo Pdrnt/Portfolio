@@ -1,9 +1,10 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 import "./portfolio.css"
 import MapaHolograma from "./components/MapaHolograma"
 import ProposalCard from "./components/ProposalCard"
-import ColmeiaView from "./components/ColmeiaView"
 import { PRODUCTS, CAROUSEL_ITEMS, CATALOG_ITEMS } from "./data/products"
+import ColmeiaPage from "./pages/ColmeiaPage"
 
 const DOUBLED_CAROUSEL = [...CAROUSEL_ITEMS, ...CAROUSEL_ITEMS]
 
@@ -17,10 +18,9 @@ const FILTERS = [
   { id: 'gov', label: 'Governo Digital' },
 ]
 
-export default function App() {
+function HomePage() {
   const [navShadow, setNavShadow] = useState(false)
   const [activeFilter, setActiveFilter] = useState('todos')
-  const [catalogView, setCatalogView] = useState('products')
   const [modal, setModal] = useState(null)
 
   useEffect(() => {
@@ -146,48 +146,36 @@ export default function App() {
       <section className="sec" id="catalogo">
         <div className="rev">
           <span className="sec-lbl">Catálogo Completo</span>
-          <h2 className="sec-title">{catalogView === 'products' ? 'Todos os Produtos' : 'Visualização Colmeia'}</h2>
+          <h2 className="sec-title">Todos os Produtos</h2>
           <p className="sec-sub">Explore o portfólio completo filtrando por vertical de atuação.</p>
         </div>
         <div className="catalog-view-tabs">
-          <button
-            className={`tab${catalogView === 'products' ? ' on' : ''}`}
-            onClick={() => setCatalogView('products')}
-          >Todos os Produtos</button>
-          <button
-            className={`tab${catalogView === 'honey' ? ' on' : ''}`}
-            onClick={() => setCatalogView('honey')}
-          >Visualização Colmeia</button>
+          <button className="tab on">Todos os Produtos</button>
+          <a href="/colmeia" className="tab">Visualização Colmeia</a>
         </div>
-        {catalogView === 'products' ? (
-          <>
-            <div className="prod-tabs">
-              {FILTERS.map(f => (
-                <button
-                  key={f.id}
-                  className={`tab${activeFilter === f.id ? ' on' : ''}`}
-                  onClick={() => setActiveFilter(f.id)}
-                >{f.label}</button>
-              ))}
-            </div>
-            <div className="pg">
-              {CATALOG_ITEMS.filter(showItem).map((item) => (
-                <div key={item.key + item.cat} className="pi" onClick={() => openProduct(item.key)}>
-                  <img className="pi-img" src={item.img} alt={item.name} />
-                  <div className="pi-body">
-                    <div className="pi-top">
-                      <div className="pi-name">{item.name}</div>
-                      <span className={`pc-badge ${item.badge}`} style={{ fontSize: '.62rem', padding: '2px 7px', whiteSpace: 'nowrap' }}>{item.badgeText}</span>
-                    </div>
-                    <div className="pi-desc">{item.desc}</div>
-                  </div>
+        <div className="prod-tabs">
+          {FILTERS.map(f => (
+            <button
+              key={f.id}
+              className={`tab${activeFilter === f.id ? ' on' : ''}`}
+              onClick={() => setActiveFilter(f.id)}
+            >{f.label}</button>
+          ))}
+        </div>
+        <div className="pg">
+          {CATALOG_ITEMS.filter(showItem).map((item) => (
+            <div key={item.key + item.cat} className="pi" onClick={() => openProduct(item.key)}>
+              <img className="pi-img" src={item.img} alt={item.name} />
+              <div className="pi-body">
+                <div className="pi-top">
+                  <div className="pi-name">{item.name}</div>
+                  <span className={`pc-badge ${item.badge}`} style={{ fontSize: '.62rem', padding: '2px 7px', whiteSpace: 'nowrap' }}>{item.badgeText}</span>
                 </div>
-              ))}
+                <div className="pi-desc">{item.desc}</div>
+              </div>
             </div>
-          </>
-        ) : (
-          <ColmeiaView />
-        )}
+          ))}
+        </div>
       </section>
 
       {/* CLIENTES + MAPA */}
@@ -282,5 +270,16 @@ export default function App() {
         )}
       </div>
     </>
+  )
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/colmeia" element={<ColmeiaPage />} />
+      </Routes>
+    </Router>
   )
 }
