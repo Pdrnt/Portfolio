@@ -33,8 +33,21 @@ export default function ColmeiaPage() {
         <div style={{ marginBottom: '24px' }}>
           <button
             onClick={() => navigate('/')}
-            className="btn-o"
-            style={{ marginBottom: '20px', display: 'inline-flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}
+            style={{
+              marginBottom: '20px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              cursor: 'pointer',
+              background: 'transparent',
+              color: '#1a1a2e',
+              border: '1.5px solid rgba(0,0,0,.2)',
+              borderRadius: '8px',
+              padding: '10px 22px',
+              fontSize: '.9rem',
+              fontWeight: 600,
+              fontFamily: 'var(--font)',
+            }}
           >← Voltar para a página principal</button>
           <span className="sec-lbl">Catálogo Completo</span>
           <h2 className="sec-title">Visualização Colmeia</h2>
