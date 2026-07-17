@@ -29,8 +29,8 @@ export default function ColmeiaPage() {
         <button className="nav-cta" onClick={() => navigate('/#contato')}>Fale Conosco</button>
       </nav>
 
-      <section className="sec" style={{ minHeight: '100vh', paddingTop: '80px' }}>
-        <div className="rev" style={{ marginBottom: '40px' }}>
+      <section className="sec" style={{ paddingTop: '100px' }}>
+        <div style={{ marginBottom: '24px' }}>
           <button
             onClick={() => navigate('/')}
             className="btn-o"
