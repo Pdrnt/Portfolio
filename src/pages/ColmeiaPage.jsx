@@ -29,7 +29,7 @@ export default function ColmeiaPage() {
         <button className="nav-cta" onClick={() => navigate('/#contato')}>Fale Conosco</button>
       </nav>
 
-      <section className="sec colmeia-sec" style={{ paddingTop: '92px' }}>
+      <section className="sec colmeia-sec">
         <ColmeiaView onBack={() => navigate('/')} />
       </section>
 
